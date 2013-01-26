@@ -1,0 +1,26 @@
+{
+  "version": "0.1",
+  "name": "GoTTC",
+  "description": "The ultimate TTC app",
+  "launch_path": "/index.html",
+  "icons": {
+    "16": "/img/icons/mortar-16.png",
+    "48": "/img/icons/mortar-48.png",
+    "128": "/img/icons/mortar-128.png"
+  },
+  "developer": {
+    "name": "Gregory Pike and Diego Escalante",
+    "url": "http://github.com/escalante/go-ttc"
+  },
+  "installs_allowed_from": ["*"],
+  "appcache_path": "/cache.manifest",
+  "locales": {
+    "es": {
+      "description": "La aplicación definitiva para TTC",
+      "developer": {
+        "url": "http://github.com/escalante/go-ttc"
+      }
+    }
+  },
+  "default_locale": "en"
+}
