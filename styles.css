@@ -102,11 +102,36 @@ h1:hover {
 }
 
 .map .stop strong {
-  color: #fff;
+  font-size: 1.2em;
+  color: #eee;
 }
 
 .map .stop .route {
-  font-size: 1.2em;
+  color: #fff;
+}
+
+.nearby-intersections {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  height: 40%;
+}
+
+.nearby-intersections .alt {
+  background: #d8eac5;
+}
+
+.list-option {
+  background: #cbdcb9;
+  border-top: 1px solid #c6d7b5;
+  margin: 0;
+  padding: 1em;
+  font-size: 1.4em;
+  color: #454545;
+  font-family: sans-serif;
+}
+.list-option:hover {
+  cursor: pointer;
 }
 
 footer {

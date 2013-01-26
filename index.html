@@ -19,8 +19,13 @@
 
 
 <div iscroll id="wrapper" ng-show="changeIntersectionRequest">
-  <ul>
-    <li id="wrapper" ng-repeat="i in nearby" ng-show="changeIntersectionRequest" ng-click="changeCurrentIntersection(i)">
+  <ul class="nearby-intersections">
+    <li
+      ng-repeat="i in nearby" 
+      ng-show="changeIntersectionRequest" 
+      ng-click="changeCurrentIntersection(i)"
+      class="list-option"
+      ng-class-even="'alt'">
     {{ i.name }}
     </li>
   </ul>
