@@ -113,15 +113,16 @@ angular.module("GoTTC", [])
                 // in that stop and direction. It is useful to have two
                 // but we have to decided which would be the second one
                 _.each(response.stops, function(stop) {
-                  nextDeparture = null;
+                  nextDeparture = {};
                   stopDirection = extractDirection(stop.uri);
                   nextDepartureTime = Number.MAX_VALUE;
                   _.each(stop.routes, function(route) {
                     if (route.stop_times[0].departure_timestamp < nextDepartureTime) {
-                      nextDeparture = route.stop_times[0];
+                      nextDeparture.first = route.stop_times[0];
+                      nextDeparture.second = route.stop_times[1];
                     }
                   });
-                  if (!nextDeparture) return true;
+                  if (!nextDeparture.first) return true;
                   nextDeparture.stationUri = stop.uri;
                   nextDeparture.stationName = stop.name;
                   departuresToBeShown[stopDirection] = nextDeparture;
@@ -224,7 +225,8 @@ angular.module("GoTTC", [])
                 if (!!value) {
                   _stopInfo = value;
                   scope.stopName = value.shape;
-                  scope.firstTime = moment.unix(value.departure_timestamp).fromNow();
+                  scope.firstTime = moment.unix(value.first.departure_timestamp).fromNow();
+                  scope.secondTime = moment.unix(value.second.departure_timestamp).fromNow();
                 }
             });
 
