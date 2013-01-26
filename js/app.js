@@ -2,8 +2,8 @@ angular.module("GoTTC", [])
 .controller("MainCtrl", [
     '$scope',
     'ttcStore',
-    'userService',
-    function($scope, ttcStore, userService) {
+    'favouritesService',
+    function($scope, ttcStore, favouritesService) {
         $scope.DEBUG = true;
 
         $scope.name = "GoTTC!";
