@@ -64,7 +64,7 @@ h1 {
   position: relative;
 }
 
-.map img {
+.map .go-ttc-map {
   margin-left: -50%;
   margin-top: -50%;
 }

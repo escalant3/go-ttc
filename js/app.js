@@ -18,7 +18,6 @@ angular.module("GoTTC", [])
 
         $scope.$on('gottc.store.intersection-times.changed', function(msg, data) {
             // TODO: These are wrong. Find a way to identify
-console.log("New times", data);
             $scope.stopHeadingSouthTime = data[0];
             $scope.stopHeadingWestTime = data[1];
             $scope.stopHeadingEastTime = data[2];
@@ -134,7 +133,7 @@ console.log("New times", data);
                 function refreshMap() {
                     scope.mapSrc = 'http://maps.googleapis.com/maps/api/staticmap?center=' +
                                     scope.latitude + ',' + scope.longitude +
-                                    '&zoom=18&size=320x400&maptype=roadmap&sensor=false';
+                                    '&zoom=18&size=700x520&maptype=roadmap&sensor=false';
                 }
 
             }
@@ -143,12 +142,14 @@ console.log("New times", data);
         };
     }
  ])
-.filter('getRouteName',function() {
-    return function(name) {
-        if (!name) return '';
-        positionOfTo = name.toLowerCase().indexOf(' to ');
-        if (positionOfTo < 0) return name;
-        return name.substr(0,positionOfTo);
-    };
-})
+.directive('iscroll', [
+    function() {
+      return {
+        link: function(scope, elem) {
+          // Create the iScroll
+          new iScroll('wrapper');
+        }
+      };
+    }
+])
 ;

@@ -17,10 +17,12 @@
 </header>
 
 
-<div ng-repeat="i in nearby" ng-show="changeIntersectionRequest">
-  <div ng-click="changeCurrentIntersection(i)">
+<div iscroll id="wrapper" ng-show="changeIntersectionRequest">
+  <ul>
+    <li id="wrapper" ng-repeat="i in nearby" ng-show="changeIntersectionRequest" ng-click="changeCurrentIntersection(i)">
     {{ i.name }}
-  </div>
+    </li>
+  </ul>
 </div>
 
 <div class="map" ng-show="tab=='nearest'">
@@ -28,8 +30,8 @@
   <div intersection-time class="stop tr" stop-time="stopHeadingWestTime"></div>
   <div intersection-time class="stop bl" stop-time="stopHeadingEastTime"></div>
   <div intersection-time class="stop br" stop-time="stopHeadingNorthTime"></div>
-  <img src="http://maps.googleapis.com/maps/api/staticmap?center=43.648758,-79.396324&zoom=18&size=700x520&maptype=roadmap&sensor=false">
-</article>
+  <div class="go-ttc-map" go-ttc-map longitude="longitude" latitude="latitude"></span>
+</div>
 
 <div class="map" ng-show="tab=='favourites'">
   TODO FAVOURITES
@@ -44,6 +46,7 @@
   <script src="js/lib/underscore-min.js"></script>
   <script src="js/lib/angular.min.js"></script>
   <script src="js/lib/moment.min.js"></script>
+  <script src="js/lib/iscroll.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>
