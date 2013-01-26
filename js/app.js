@@ -84,10 +84,11 @@ angular.module("GoTTC", [])
     }
 ])
 .directive('intersectionTime', [
-    function() {
+    '$filter',
+    function($filter) {
       return {
         scope: true,
-        template: '<strong class="route" ng-bind="stopName"></strong><br><strong>South</strong><br>{{ firstTime }}<br>{{ secondTime }}',
+        template: '<strong class="route" ng-bind="stopName | getRouteName"></strong><br><strong>South</strong><br>{{ firstTime }}<br>{{ secondTime }}<img src="img/south.png">',
         link: function(scope, element, attrs) {
             scope.$watch(attrs.stopTime, function(value) {
                 if (!!value) {
@@ -131,4 +132,12 @@ angular.module("GoTTC", [])
         };
     }
  ])
+.filter('getRouteName',function() {
+    return function(name) {
+        if (!name) return '';
+        positionOfTo = name.toLowerCase().indexOf(' to ');
+        if (positionOfTo < 0) return name;
+        return name.substr(0,positionOfTo);
+    };
+})
 ;

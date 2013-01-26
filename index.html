@@ -12,19 +12,17 @@
 </head>
 <body ng-controller="MainCtrl">
 
-<img src="go-ttc-icon.png" class="gottc">
+<header>
+  <h1 ng-bind="currentIntersection.name"></h1>
+</header>
 
-<img src="arrow-down.png" class="arrow-down">
-
-<h1 ng-bind="currentIntersection.name">Queen and Spadina </h1>
-
-<div class="map" ng-show="tab=='nearest'">
+<article class="map" ng-show="tab=='nearest'">
   <div intersection-time class="stop tl" stop-time="stopHeadingSouthTime"></div>
   <div intersection-time class="stop tr" stop-time="stopHeadingWestTime"></div>
   <div intersection-time class="stop bl" stop-time="stopHeadingEastTime"></div>
   <div intersection-time class="stop br" stop-time="stopHeadingNorthTime"></div>
   <img src="http://maps.googleapis.com/maps/api/staticmap?center=43.648758,-79.396324&zoom=18&size=700x520&maptype=roadmap&sensor=false">
-</div>
+</article>
 
 <div class="map" ng-show="tab=='favourites'">
   TODO FAVOURITES
