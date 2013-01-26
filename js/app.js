@@ -224,7 +224,7 @@ angular.module("GoTTC", [])
             scope.$watch(attrs.stopTime, function(value) {
                 if (!!value) {
                   _stopInfo = value;
-                  scope.stopName = value.shape;
+                  scope.stopName = value.first.shape;
                   scope.firstTime = moment.unix(value.first.departure_timestamp).fromNow();
                   scope.secondTime = moment.unix(value.second.departure_timestamp).fromNow();
                 }
