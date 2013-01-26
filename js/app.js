@@ -98,14 +98,21 @@ angular.module("GoTTC", [])
     function($filter) {
       return {
         scope: true,
-        template: '<strong class="route" ng-bind="stopName | getRouteName"></strong><br><strong>South</strong><br>{{ firstTime }}<br>{{ secondTime }}<img src="img/south.png">',
+        template: '<strong class="route" ng-bind="stopName | getRouteName"></strong><br><strong><img ng-src="{{compassUrl}}" ng-show="compassUrl" height="18"> {{direction}}</strong><br>{{ firstTime }}<br>{{ secondTime }}',
         link: function(scope, element, attrs) {
+            scope.direction = $filter('capitalize')(attrs.direction);
             scope.$watch(attrs.stopTime, function(value) {
                 if (!!value) {
                   scope.stopName = value.shape;
                   scope.firstTime = moment.unix(value.departure_timestamp).fromNow();
                 }
             });
+
+            var getCompassUrl = function (direction) {
+                return 'img/'+direction.toLowerCase()+'.png';
+            }
+
+            scope.compassUrl = getCompassUrl(scope.direction);
         }
       };
     }
@@ -152,4 +159,17 @@ angular.module("GoTTC", [])
       };
     }
 ])
+.filter('getRouteName',function() {
+    return function(name) {
+        if (!name) return '';
+        positionOfTo = name.toLowerCase().indexOf(' to ');
+        if (positionOfTo < 0) return name;
+        return name.substr(0,positionOfTo);
+    };
+})
+.filter('capitalize', function() {
+    return function(string) {
+            return (_.isString(string) && !!string.length) ? string[0].toUpperCase() + string.slice(1) : string;
+    };
+})
 ;
