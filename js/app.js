@@ -26,6 +26,8 @@ angular.module("GoTTC", [])
 
         $scope.changeCurrentIntersection = function(intersection) {
             $scope.currentIntersection = intersection;
+            $scope.longitude = intersection.lng;
+            $scope.latitude = intersection.lat;
             $scope.changeIntersectionRequest = false;
         };
 
@@ -110,6 +112,7 @@ angular.module("GoTTC", [])
                       nextDeparture = route.stop_times[0];
                     }
                   });
+                  if (!nextDeparture) return true;
                   nextDeparture.stationUri = stop.uri;
                   nextDeparture.stationName = stop.name;
                   departuresToBeShown[stopDirection] = nextDeparture;
@@ -215,7 +218,6 @@ angular.module("GoTTC", [])
     'userService',
     function(userService) {
         return {
-            scope: true,
             template: '<img ng-src="{{mapSrc}}"/>',
             link: function(scope, elem, attrs) {
                 scope.$watch(attrs.longitude, function(value) {
