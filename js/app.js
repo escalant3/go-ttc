@@ -2,7 +2,8 @@ angular.module("GoTTC", [])
 .controller("MainCtrl", [
     '$scope',
     'ttcStore',
-    function($scope, ttcStore) {
+    'userService',
+    function($scope, ttcStore, userService) {
         $scope.DEBUG = true;
 
         $scope.name = "GoTTC!";
@@ -41,6 +42,26 @@ angular.module("GoTTC", [])
             {name: "Exhibition at Robinson and Bathurst"},
             {name: "Exhibition at Ulster and Bathurst"}
         ];
+    }
+])
+.service('userService', [
+    function() {
+
+        var viewportSize = null;
+
+        var elem = (document.compatMode === "CSS1Compat") ? 
+                document.documentElement :
+                document.body;
+
+        viewportSize = {
+            'width': elem.clientWidth,
+            'height': elem.clientHeight
+        };
+
+        return {
+            viewportWidth: viewportSize.width,
+            viewportHeight: viewportSize.height
+        }
     }
 ])
 .service('ttcStore', [
@@ -136,7 +157,8 @@ angular.module("GoTTC", [])
     }
 ])
 .directive('goTtcMap', [
-    function() {
+    'userService',
+    function(userService) {
         return {
             scope: true,
             template: '<img ng-src="{{mapSrc}}"/>',
@@ -158,7 +180,7 @@ angular.module("GoTTC", [])
                 function refreshMap() {
                     scope.mapSrc = 'http://maps.googleapis.com/maps/api/staticmap?center=' +
                                     scope.latitude + ',' + scope.longitude +
-                                    '&zoom=18&size=700x520&maptype=roadmap&sensor=false';
+                                    '&zoom=18&size=' + userService.viewportWidth + 'x' + parseInt(userService.viewportHeight - 80, 10) + '&maptype=roadmap&sensor=false';
                 }
 
             }

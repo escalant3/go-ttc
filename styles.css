@@ -23,6 +23,7 @@ body {
 header {
   width: 100%;
   background-color: #5ca317; /*linear-gradient(top, rgba(92,163,23,1) 0%,rgba(104,184,26,0.73) 100%)*/
+  min-height: 40px;
 }
 
 .gottc {
@@ -54,10 +55,10 @@ h1:hover {
   position: relative;
 }
 
-.map .go-ttc-map {
+/*.map .go-ttc-map {
   margin-left: -50%;
   margin-top: -50%;
-}
+}*/
 
 .map .stop {
   background: #4e8b14;
@@ -89,13 +90,13 @@ h1:hover {
 }
 
 .map .stop.bl {
-  bottom: 5px;
+  bottom: 45px;
   left: 5px;
   border-top-right-radius: 30px;
 }
 
 .map .stop.br {
-  bottom: 5px;
+  bottom: 45px;
   right: 5px;
   text-align: right;
   border-top-left-radius: 30px;
@@ -114,7 +115,7 @@ h1:hover {
   list-style-type: none;
   margin: 0;
   padding: 0;
-  height: 40%;
+  height: 220px;
 }
 
 .nearby-intersections .alt {
