@@ -299,7 +299,6 @@ angular.module("GoTTC", [])
 
           scope.$watch(attrs.station, function(value) {
             if (!!value) {
-              console.log(value);
               _station = value;
               
               scope.name = _station.name;
