@@ -22,6 +22,7 @@ body {
 
 header {
   width: 100%;
+  position: relative;
   background-color: #5ca317; /*linear-gradient(top, rgba(92,163,23,1) 0%,rgba(104,184,26,0.73) 100%)*/
   min-height: 40px;
 }
@@ -158,4 +159,18 @@ footer a {
 
 footer a.active {
   background: #5ca317;
+}
+
+.loading-base {
+  background: white;
+  display: inline-block;
+  /*border: 1px solid #E1E1E1;*/
+  padding: 8px;
+  border-radius: 48px;
+}
+
+.loading-message {
+  font-family: sans-serif;
+  color: #999;
+  font-size: 1.4em;
 }
