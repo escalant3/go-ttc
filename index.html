@@ -40,7 +40,9 @@
 </div>
 
 <div class="map" ng-show="tab=='favourites'">
-  TODO FAVOURITES
+  <div ng-repeat="fav in favourites">
+    {{ fav.name }}
+  </div>
 </div>
 
 <footer>
