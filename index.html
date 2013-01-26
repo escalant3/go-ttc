@@ -39,10 +39,18 @@
   <div class="go-ttc-map" go-ttc-map longitude="longitude" latitude="latitude"></div>
 </div>
 
-<div class="map" ng-show="tab=='favourites'">
-  <div ng-repeat="fav in favourites">
-    {{ fav.name }}
-  </div>
+<div class="map" ng-show="tab=='favourites'" style="height:400px">
+  <ul class="nearby-intersections">
+    <li
+      favourite-station
+      station="fav"
+      ng-repeat="fav in favourites" 
+      class="list-option"
+      ng-click="getFavouriteTime(fav)"
+      ng-class-even="'alt'">
+    </li>
+  </ul>
+
 </div>
 
 <footer>

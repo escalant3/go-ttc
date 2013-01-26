@@ -45,6 +45,15 @@ angular.module("GoTTC", [])
         $scope.$on('gottc.favourites.changed', function(msg, data) {
           $scope.favourites = favouritesService.get();
         });
+
+        $scope.$on('gottc.store.station-times.changed', function(msg, data) {
+          console.log(data);
+        });
+
+        $scope.getFavouriteTime = function(station) {
+            ttcStore.getStopTime(station);
+        };
+ 
     }
 ])
 .service('userService', [
@@ -64,7 +73,7 @@ angular.module("GoTTC", [])
         return {
             viewportWidth: viewportSize.width,
             viewportHeight: viewportSize.height
-        }
+        };
     }
 ])
 .service('ttcStore', [
@@ -122,10 +131,29 @@ angular.module("GoTTC", [])
             });
         }
 
+        function getStopTime(station) {
+            $http.jsonp('http://myttc.ca/' + station.uri + '.json?callback=JSON_CALLBACK')
+              .success(function(response) {
+                var times = [];
+                _.each(response.stops, function(stop) {
+                  if (stop.uri === station.uri) {
+                    var minTime = Number.MAX_VALUE;
+                    _.each(stop.routes, function(route) {
+                      minTime = Math.min(minTime, route.stop_times[0].departure_timestamp);
+                    });
+                    times.push(moment.unix(minTime).fromNow());
+                    $rootScope.$broadcast('gottc.store.station-times.changed' + station.uri, times);
+                  }
+                });
+
+              });
+        }
+
         return {
             getNearby: getNearby,
             getCurrentIntersection: getCurrentIntersection,
-            getIntersectionTimes: getIntersectionTimes
+            getIntersectionTimes: getIntersectionTimes,
+            getStopTime: getStopTime
         };
     }
 ])
@@ -210,7 +238,8 @@ angular.module("GoTTC", [])
             scope.addToFavourites = function() {
               favouritesService.add(_stopInfo);
             };
-        }
+
+       }
       };
     }
 ])
@@ -251,7 +280,46 @@ angular.module("GoTTC", [])
       return {
         link: function(scope, elem) {
           // Create the iScroll
-          new iScroll('wrapper');
+         // new iScroll('wrapper');
+        }
+      };
+    }
+])
+.directive('favouriteStation', [
+    '$timeout',
+    'ttcStore',
+    function($timeout, ttcStore) {
+      return {
+        template: '{{ name }} <strong>{{ nextOne}}</strong>',
+        scope: true,
+        link: function(scope, elem, attrs) {
+          var _station;
+
+          scope.$watch(attrs.station, function(value) {
+            if (!!value) {
+              console.log(value);
+              _station = value;
+              
+              scope.name = _station.name;
+              scope.uri = value.uri;
+    
+              scope.$on('gottc.store.station-times.changed' + scope.uri, function(msg, value) {
+                if (!!value) {
+                  scope.nextOne = value[0];
+                }
+              });
+
+              ttcStore.getStopTime(_station);
+            }
+          });
+
+
+          $timeout(function() {
+            if (!!_station) {
+              ttcStore.getStopTime(_station);
+            }
+          }, 5000);
+
         }
       };
     }
