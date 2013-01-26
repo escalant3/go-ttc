@@ -26,10 +26,10 @@
 </div>
 
 <div class="map" ng-show="tab=='nearest'">
-  <div intersection-time class="stop tl" stop-time="stopHeadingSouthTime"></div>
-  <div intersection-time class="stop tr" stop-time="stopHeadingWestTime"></div>
-  <div intersection-time class="stop bl" stop-time="stopHeadingEastTime"></div>
-  <div intersection-time class="stop br" stop-time="stopHeadingNorthTime"></div>
+  <div intersection-time class="stop tl" stop-time="stopHeadingSouthTime" direction="south"></div>
+  <div intersection-time class="stop tr" stop-time="stopHeadingWestTime" direction="west"></div>
+  <div intersection-time class="stop bl" stop-time="stopHeadingEastTime" direction="east"></div>
+  <div intersection-time class="stop br" stop-time="stopHeadingNorthTime" direction="north"></div>
   <div class="go-ttc-map" go-ttc-map longitude="longitude" latitude="latitude"></span>
 </div>
 

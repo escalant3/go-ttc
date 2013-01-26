@@ -109,8 +109,9 @@ angular.module("GoTTC", [])
             });
 
             var getCompassUrl = function (direction) {
-                return 'img/'+direction.toLowerCase()+'.png';
-            }
+                if (!direction) return null;
+                return 'img/' + direction.toLowerCase() + '.png';
+            };
 
             scope.compassUrl = getCompassUrl(scope.direction);
         }
