@@ -17,11 +17,10 @@ angular.module("GoTTC", [])
         });
 
         $scope.$on('gottc.store.intersection-times.changed', function(msg, data) {
-            // TODO: These are wrong. Find a way to identify
-            $scope.stopHeadingSouthTime = data[0];
-            $scope.stopHeadingWestTime = data[1];
-            $scope.stopHeadingEastTime = data[2];
-            $scope.stopHeadingNorthTime = data[3];
+            $scope.stopHeadingSouthTime = data.south;
+            $scope.stopHeadingWestTime = data.west;
+            $scope.stopHeadingEastTime = data.east;
+            $scope.stopHeadingNorthTime = data.north;
         });
 
         $scope.changeCurrentIntersection = function(intersection) {
@@ -61,25 +60,36 @@ angular.module("GoTTC", [])
             }
         }
 
+        function extractDirection(stationUri) {
+          if (stationUri.match(/eastbound/)) return "east";
+          else if (stationUri.match(/westbound/)) return "west";
+          else if (stationUri.match(/northbound/)) return "north";
+          else if (stationUri.match(/southbound/)) return "south";
+          console.warn("Couldn't find a direction for", stationUri);
+        }
+
         function getIntersectionTimes(stationName) {
             $http.jsonp('http://myttc.ca/' + stationName + '.json?callback=JSON_CALLBACK')
             .success(function(response) {
                 var nextDeparture,
                     nextDepartureTime,
-                    departuresToBeShown = [];
+                    stopDirection,
+                    departuresToBeShown = {};
 
                 // We only want the next departure. From all the lines
                 // in that stop and direction. It is useful to have two
                 // but we have to decided which would be the second one
                 _.each(response.stops, function(stop) {
                   nextDeparture = null;
+                  stopDirection = extractDirection(stop.uri);
+                  console.log(stopDirection);
                   nextDepartureTime = Number.MAX_VALUE;
                   _.each(stop.routes, function(route) {
                     if (route.stop_times[0].departure_timestamp < nextDepartureTime) {
                       nextDeparture = route.stop_times[0];
                     }
                   });
-                  departuresToBeShown.push(nextDeparture);
+                  departuresToBeShown[stopDirection] = nextDeparture;
 
                 });
                 $rootScope.$broadcast('gottc.store.intersection-times.changed', departuresToBeShown);
@@ -98,7 +108,11 @@ angular.module("GoTTC", [])
     function($filter) {
       return {
         scope: true,
-        template: '<strong class="route" ng-bind="stopName | getRouteName"></strong><br><strong><img ng-src="{{compassUrl}}" ng-show="compassUrl" height="18"> {{direction}}</strong><br>{{ firstTime }}<br>{{ secondTime }}',
+        template: '<strong class="route" ng-bind="stopName | getRouteName"></strong><br>' +
+                  '<strong><img ng-src="{{compassUrl}}" ng-show="compassUrl" height="18"> {{direction}}</strong>'+ 
+                  '<br>{{ firstTime }}<br>{{ secondTime }}' +
+                  '<div ng-click="addToFavourites()">Add to Fav.</div>',
+
         link: function(scope, element, attrs) {
             scope.direction = $filter('capitalize')(attrs.direction);
             scope.$watch(attrs.stopTime, function(value) {
@@ -114,6 +128,9 @@ angular.module("GoTTC", [])
             };
 
             scope.compassUrl = getCompassUrl(scope.direction);
+
+            scope.addToFav = function() {
+            };
         }
       };
     }
