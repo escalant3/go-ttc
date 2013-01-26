@@ -14,15 +14,26 @@ angular.module("GoTTC", [])
         $scope.$on('gottc.store.nearby.changed', function(msg, data) {
             $scope.nearby = data;
             $scope.currentIntersection = ttcStore.getCurrentIntersection(data);
-            ttcStore.getIntersectionTimes($scope.currentIntersection.uri);
         });
 
         $scope.$on('gottc.store.intersection-times.changed', function(msg, data) {
             // TODO: These are wrong. Find a way to identify
+console.log("New times", data);
             $scope.stopHeadingSouthTime = data[0];
             $scope.stopHeadingWestTime = data[1];
             $scope.stopHeadingEastTime = data[2];
             $scope.stopHeadingNorthTime = data[3];
+        });
+
+        $scope.changeCurrentIntersection = function(intersection) {
+            $scope.currentIntersection = intersection;
+            $scope.changeIntersectionRequest = false;
+        };
+
+        $scope.$watch('currentIntersection', function(value) {
+            if (!!value) {
+                ttcStore.getIntersectionTimes(value.uri);
+            }
         });
 
         ttcStore.getNearby($scope.latitude, $scope.longitude);

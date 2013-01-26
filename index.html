@@ -13,10 +13,17 @@
 <body ng-controller="MainCtrl">
 
 <header>
-  <h1 ng-bind="currentIntersection.name"></h1>
+  <h1 ng-bind="currentIntersection.name" ng-click="changeIntersectionRequest=!changeIntersectionRequest"></h1>
 </header>
 
-<article class="map" ng-show="tab=='nearest'">
+
+<div ng-repeat="i in nearby" ng-show="changeIntersectionRequest">
+  <div ng-click="changeCurrentIntersection(i)">
+    {{ i.name }}
+  </div>
+</div>
+
+<div class="map" ng-show="tab=='nearest'">
   <div intersection-time class="stop tl" stop-time="stopHeadingSouthTime"></div>
   <div intersection-time class="stop tr" stop-time="stopHeadingWestTime"></div>
   <div intersection-time class="stop bl" stop-time="stopHeadingEastTime"></div>
