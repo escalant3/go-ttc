@@ -37,11 +37,12 @@ angular.module("GoTTC", [])
 
         ttcStore.getNearby($scope.latitude, $scope.longitude);
 
-        $scope.favourites = [
-            {name: "Exhibition at Queen and Bathurst"},
-            {name: "Exhibition at Robinson and Bathurst"},
-            {name: "Exhibition at Ulster and Bathurst"}
-        ];
+        $scope.favourites = favouritesService.get();
+
+        // Update the favourites as soon as a new one is added
+        $scope.$on('gottc.favourites.changed', function(msg, data) {
+          $scope.favourites = favouritesService.get();
+        });
     }
 ])
 .service('userService', [
@@ -103,13 +104,14 @@ angular.module("GoTTC", [])
                 _.each(response.stops, function(stop) {
                   nextDeparture = null;
                   stopDirection = extractDirection(stop.uri);
-                  console.log(stopDirection);
                   nextDepartureTime = Number.MAX_VALUE;
                   _.each(stop.routes, function(route) {
                     if (route.stop_times[0].departure_timestamp < nextDepartureTime) {
                       nextDeparture = route.stop_times[0];
                     }
                   });
+                  nextDeparture.stationUri = stop.uri;
+                  nextDeparture.stationName = stop.name;
                   departuresToBeShown[stopDirection] = nextDeparture;
 
                 });
@@ -124,9 +126,58 @@ angular.module("GoTTC", [])
         };
     }
 ])
+.service('favouritesService', [
+    function() {
+      var _initialized = false;
+      var _goTTC;
+      
+      function initialize() {
+        var initialValues = {
+          config: {},
+          favourites: []
+        };
+        if (!localStorage.getItem('goTTC')) {
+          _goTTC = initialValues;
+          localStorage.setItem('goTTC', JSON.stringify(_goTTC));
+        } else {
+          _goTTC = JSON.parse(localStorage.getItem('goTTC'));
+        }
+
+        _initialized = true;
+      }
+
+      function add(station) {
+        var stationCopy;
+        if (!_initialized) initialize();
+        // TODO Check it is not already there
+        stationCopy = {
+          name: station.stationName,
+          uri: station.stationUri
+        };
+        _goTTC.favourites.push(stationCopy);
+        save();
+      }
+
+      function get() {
+        if (!_initialized) initialize();
+        return _goTTC.favourites;
+      }
+
+      function save() {
+        if (!_initialized) initialize();
+        localStorage.setItem('goTTC', JSON.stringify(_goTTC));
+      }
+
+      return {
+        add: add,
+        get: get
+      };
+    }
+])
 .directive('intersectionTime', [
     '$filter',
-    function($filter) {
+    'favouritesService',
+    function($filter, favouritesService) {
       return {
         scope: true,
         template: '<strong class="route" ng-bind="stopName | getRouteName"></strong><br>' +
@@ -135,9 +186,12 @@ angular.module("GoTTC", [])
                   '<div ng-click="addToFavourites()">Add to Fav.</div>',
 
         link: function(scope, element, attrs) {
+            var _stopInfo = null;
+
             scope.direction = $filter('capitalize')(attrs.direction);
             scope.$watch(attrs.stopTime, function(value) {
                 if (!!value) {
+                  _stopInfo = value;
                   scope.stopName = value.shape;
                   scope.firstTime = moment.unix(value.departure_timestamp).fromNow();
                 }
@@ -150,7 +204,8 @@ angular.module("GoTTC", [])
 
             scope.compassUrl = getCompassUrl(scope.direction);
 
-            scope.addToFav = function() {
+            scope.addToFavourites = function() {
+              favouritesService.add(_stopInfo);
             };
         }
       };
