@@ -215,7 +215,7 @@ angular.module("GoTTC", [])
         template: '<strong class="route" ng-bind="stopName | getRouteName"></strong><br>' +
                   '<strong><img ng-src="{{compassUrl}}" ng-show="compassUrl" height="18"> {{direction}}</strong>'+ 
                   '<br>{{ firstTime }}<br>{{ secondTime }}' +
-                  '<div ng-click="addToFavourites()">Add to Fav.</div>',
+                  '<div ng-click="addToFavourites()" class="favourite-link"><img src="img/favorite.png" height="12"> Save</div>',
 
         link: function(scope, element, attrs) {
             var _stopInfo = null;
