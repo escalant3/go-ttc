@@ -102,34 +102,38 @@ angular.module("GoTTC", [])
         }
 
         function getIntersectionTimes(stationName) {
-            $http.jsonp('http://myttc.ca/' + stationName + '.json?callback=JSON_CALLBACK')
-            .success(function(response) {
-                var nextDeparture,
-                    nextDepartureTime,
-                    stopDirection,
-                    departuresToBeShown = {};
 
-                // We only want the next departure. From all the lines
-                // in that stop and direction. It is useful to have two
-                // but we have to decided which would be the second one
-                _.each(response.stops, function(stop) {
-                  nextDeparture = {};
-                  stopDirection = extractDirection(stop.uri);
-                  nextDepartureTime = Number.MAX_VALUE;
-                  _.each(stop.routes, function(route) {
-                    if (route.stop_times[0].departure_timestamp < nextDepartureTime) {
-                      nextDeparture.first = route.stop_times[0];
-                      nextDeparture.second = route.stop_times[1];
-                    }
-                  });
-                  if (!nextDeparture.first) return true;
-                  nextDeparture.stationUri = stop.uri;
-                  nextDeparture.stationName = stop.name;
-                  departuresToBeShown[stopDirection] = nextDeparture;
+          $rootScope.showModalOverlay = true;
 
+          $http.jsonp('http://myttc.ca/' + stationName + '.json?callback=JSON_CALLBACK')
+          .success(function(response) {
+              var nextDeparture,
+                  nextDepartureTime,
+                  stopDirection,
+                  departuresToBeShown = {};
+
+              // We only want the next departure. From all the lines
+              // in that stop and direction. It is useful to have two
+              // but we have to decided which would be the second one
+              _.each(response.stops, function(stop) {
+                nextDeparture = {};
+                stopDirection = extractDirection(stop.uri);
+                nextDepartureTime = Number.MAX_VALUE;
+                _.each(stop.routes, function(route) {
+                  if (route.stop_times[0].departure_timestamp < nextDepartureTime) {
+                    nextDeparture.first = route.stop_times[0];
+                    nextDeparture.second = route.stop_times[1];
+                  }
                 });
-                $rootScope.$broadcast('gottc.store.intersection-times.changed', departuresToBeShown);
-            });
+                if (!nextDeparture.first) return true;
+                nextDeparture.stationUri = stop.uri;
+                nextDeparture.stationName = stop.name;
+                departuresToBeShown[stopDirection] = nextDeparture;
+
+              });
+              $rootScope.showModalOverlay = false;
+              $rootScope.$broadcast('gottc.store.intersection-times.changed', departuresToBeShown);
+          });
         }
 
         function getStopTime(station) {
