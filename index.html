@@ -65,8 +65,13 @@
   <script src="js/lib/iscroll.js"></script>
   <script src="js/app.js"></script>
 
-<div loading show-loading="showModalOverlay" ng-class="{'high-loading': showModalOverlay}"></div>
-<div ng-class="{'modal-overlay': showModalOverlay}"></div>
+<div 
+  loading 
+  show-loading="fullScreenLoading" 
+  class="full-screen-loading"
+  ng-class="{'loading-loaded': fullScreenLoading}">
+</div>
+<div class="modal-overlay" ng-class="{'loading-loaded': fullScreenLoading}"></div>
 
 </body>
 </html>

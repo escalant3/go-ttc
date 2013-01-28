@@ -1,9 +1,10 @@
 angular.module("GoTTC", [])
 .controller("MainCtrl", [
     '$scope',
+    '$rootScope',
     'ttcStore',
     'favouritesService',
-    function($scope, ttcStore, favouritesService) {
+    function($scope, $rootScope, ttcStore, favouritesService) {
         $scope.DEBUG = true;
 
         $scope.name = "GoTTC!";
@@ -12,9 +13,16 @@ angular.module("GoTTC", [])
         $scope.longitude = '-79.396324';
         $scope.latitude = '43.648758';
 
+        $rootScope.fullScreenLoading = false;
+
         $scope.$on('gottc.store.nearby.changed', function(msg, data) {
-            $scope.nearby = data;
-            $scope.currentIntersection = ttcStore.getCurrentIntersection(data);
+          //$rootScope.fullScreenLoading = true
+          $scope.nearby = data;
+          $scope.currentIntersection = ttcStore.getCurrentIntersection(data);
+        });
+
+        $scope.$watch('currentIntersection', function(){
+          //$rootScope.fullScreenLoading = false;
         });
 
         $scope.$on('gottc.store.intersection-times.changed', function(msg, data) {
@@ -103,7 +111,7 @@ angular.module("GoTTC", [])
 
         function getIntersectionTimes(stationName) {
 
-          $rootScope.showModalOverlay = true;
+          $rootScope.fullScreenLoading = true;
 
           $http.jsonp('http://myttc.ca/' + stationName + '.json?callback=JSON_CALLBACK')
           .success(function(response) {
@@ -131,7 +139,7 @@ angular.module("GoTTC", [])
                 departuresToBeShown[stopDirection] = nextDeparture;
 
               });
-              $rootScope.showModalOverlay = false;
+              $rootScope.fullScreenLoading = false;
               $rootScope.$broadcast('gottc.store.intersection-times.changed', departuresToBeShown);
           });
         }
