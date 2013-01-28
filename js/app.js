@@ -345,7 +345,7 @@ angular.module("GoTTC", [])
 
       scope.showLoading = true;
       scope.message = null;
-      scope.size = 64;
+      scope.size = 80;
 
       if (!!attrs.message) {
         scope.message = attrs.message;
