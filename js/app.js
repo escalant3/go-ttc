@@ -4,14 +4,12 @@ angular.module("GoTTC", [])
     '$rootScope',
     'ttcStore',
     'favouritesService',
-    function($scope, $rootScope, ttcStore, favouritesService) {
+    'locationService',
+    function($scope, $rootScope, ttcStore, favouritesService, locationService) {
         $scope.DEBUG = true;
 
         $scope.name = "GoTTC!";
         $scope.tab = "nearest";
-
-        $scope.longitude = '-79.396324';
-        $scope.latitude = '43.648758';
 
         $rootScope.fullScreenLoading = false;
 
@@ -19,10 +17,6 @@ angular.module("GoTTC", [])
           //$rootScope.fullScreenLoading = true
           $scope.nearby = data;
           $scope.currentIntersection = ttcStore.getCurrentIntersection(data);
-        });
-
-        $scope.$watch('currentIntersection', function(){
-          //$rootScope.fullScreenLoading = false;
         });
 
         $scope.$on('gottc.store.intersection-times.changed', function(msg, data) {
@@ -45,8 +39,6 @@ angular.module("GoTTC", [])
             }
         });
 
-        ttcStore.getNearby($scope.latitude, $scope.longitude);
-
         $scope.favourites = favouritesService.get();
 
         // Update the favourites as soon as a new one is added
@@ -56,6 +48,12 @@ angular.module("GoTTC", [])
 
         $scope.$on('gottc.store.station-times.changed', function(msg, data) {
           console.log(data);
+        });
+
+        $scope.$on('gottc.position.changed', function(msg, data) {
+          $scope.longitude = data.longitude;
+          $scope.latitude = data.latitude;
+          ttcStore.getNearby($scope.latitude, $scope.longitude);
         });
 
         $scope.getFavouriteTime = function(station) {
@@ -221,6 +219,27 @@ angular.module("GoTTC", [])
       };
     }
 ])
+.service('locationService', [
+    '$rootScope',
+    function($rootScope) {
+
+      function getLocation() {
+        navigator.geolocation.getCurrentPosition(successCallback);
+      }
+
+      function successCallback(position) {
+        if (!!position.coords) {
+          $rootScope.$broadcast('gottc.position.changed', position.coords);
+        }
+      }
+
+      if (!!navigator.geolocation) {
+        getLocation();
+        //setInterval(getLocation, GEOLOCATION_REFRESH_INTERVAL);
+      }
+
+    }
+])
 .directive('intersectionTime', [
     '$filter',
     'favouritesService',
@@ -242,6 +261,10 @@ angular.module("GoTTC", [])
                   scope.stopName = value.first.shape;
                   scope.firstTime = moment.unix(value.first.departure_timestamp).fromNow();
                   scope.secondTime = moment.unix(value.second.departure_timestamp).fromNow();
+                } else {
+                  scope.stopName = null;
+                  scope.firtTime = null;
+                  scope.secondTime = null;
                 }
             });
 
