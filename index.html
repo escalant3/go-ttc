@@ -15,7 +15,10 @@
 
 <header>
   <img src="img/go-ttc-icon.png" class="gottc">
-  <h1 ng-bind="currentIntersection.name" ng-click="changeIntersectionRequest=!changeIntersectionRequest"></h1>
+  <h1 
+    ng-bind="currentIntersection.name" 
+    ng-click="changeIntersectionRequest=!changeIntersectionRequest">
+  </h1>
 </header>
 
 <div iscroll id="wrapper" ng-show="changeIntersectionRequest">
@@ -31,15 +34,47 @@
   </ul>
 </div>
 
-<div class="map" ng-show="tab=='nearest'" ng-click="changeIntersectionRequest=false">
-  <div intersection-time class="stop tl" ng-show="stopHeadingSouthTime" stop-time="stopHeadingSouthTime" direction="south"></div>
-  <div intersection-time class="stop tr" ng-show="stopHeadingWestTime" stop-time="stopHeadingWestTime" direction="west"></div>
-  <div intersection-time class="stop bl" ng-show="stopHeadingEastTime" stop-time="stopHeadingEastTime" direction="east"></div>
-  <div intersection-time class="stop br" ng-show="stopHeadingNorthTime" stop-time="stopHeadingNorthTime" direction="north"></div>
-  <div class="go-ttc-map" go-ttc-map longitude="longitude" latitude="latitude"></div>
+<div 
+  class="map" 
+  ng-show="tab=='nearest'" 
+  ng-click="changeIntersectionRequest=false">
+  <div 
+    intersection-time 
+    class="stop tl" 
+    ng-show="stopHeadingSouthTime" 
+    stop-time="stopHeadingSouthTime" 
+    direction="south">
+  </div>
+  <div 
+    intersection-time 
+    class="stop tr" 
+    ng-show="stopHeadingWestTime" 
+    stop-time="stopHeadingWestTime" 
+    direction="west">
+  </div>
+  <div 
+    intersection-time 
+    class="stop bl" 
+    ng-show="stopHeadingEastTime" 
+    stop-time="stopHeadingEastTime" 
+    direction="east">
+  </div>
+  <div 
+    intersection-time 
+    class="stop br" 
+    ng-show="stopHeadingNorthTime" 
+    stop-time="stopHeadingNorthTime" 
+    direction="north">
+  </div>
+  <div 
+    class="go-ttc-map" 
+    go-ttc-map 
+    longitude="longitude" 
+    latitude="latitude">
+  </div>
 </div>
 
-<div class="map" ng-show="tab=='favourites'" style="height:400px">
+<div ng-show="tab=='favourites'">
   <ul class="nearby-intersections">
     <li
       favourite-station
@@ -50,12 +85,20 @@
       ng-class-even="'alt'">
     </li>
   </ul>
-
 </div>
 
 <footer>
-  <a href="" ng-click="tab='nearest'" ng-class="{'active': tab=='nearest'}">Nearest</a>
-  <a ng-click="tab='favourites'" ng-class="{'active': tab=='favourites'}">Favourites</a>
+  <a 
+    href="" 
+    ng-click="tab='nearest'" 
+    ng-class="{'active': tab=='nearest'}">
+    Nearest
+  </a>
+  <a 
+    ng-click="tab='favourites'" 
+    ng-class="{'active': tab=='favourites'}">
+    Favourites
+  </a>
 </footer>
 
 
