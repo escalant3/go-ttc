@@ -208,6 +208,18 @@ angular.module("GoTTC", [])
         return _goTTC.favourites;
       }
 
+      function remove(station) {
+        if (!_initialized) initialize();
+
+        _.each(_goTTC.favourites, function(favourite, index) {
+          if (favourite.name === station.name) {
+            _goTTC.favourites.splice(index, 1);
+            save();
+            return false;
+          }
+        });
+      }
+
       function save() {
         if (!_initialized) initialize();
         localStorage.setItem('goTTC', JSON.stringify(_goTTC));
@@ -215,7 +227,8 @@ angular.module("GoTTC", [])
 
       return {
         add: add,
-        get: get
+        get: get,
+        remove: remove
       };
     }
 ])
@@ -328,9 +341,10 @@ angular.module("GoTTC", [])
 .directive('favouriteStation', [
     '$timeout',
     'ttcStore',
-    function($timeout, ttcStore) {
+    'favouritesService',
+    function($timeout, ttcStore, favouritesService) {
       return {
-        template: '{{ name }} <strong>{{ nextOne}}</strong>',
+        template: '{{ name }} <strong>{{ nextOne}}</strong><span ng-click="removeFromFavourites()">X</span>',
         scope: true,
         link: function(scope, elem, attrs) {
           var _station;
@@ -352,6 +366,9 @@ angular.module("GoTTC", [])
             }
           });
 
+          scope.removeFromFavourites = function() {
+            favouritesService.remove(_station);
+          };
 
           $timeout(function() {
             if (!!_station) {
