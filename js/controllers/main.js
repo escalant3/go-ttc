@@ -10,6 +10,7 @@ angular.module('GoTTC')
 
         $scope.name = "GoTTC!";
         $scope.tab = "nearest";
+        $scope.subtab = "";
 
         $rootScope.fullScreenLoading = false;
 
