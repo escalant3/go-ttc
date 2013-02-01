@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en" ng-app="GoTTC">
+<head>
+  <meta charset="utf-8">
+  <title>GoTTC</title>
+  <meta name="description" content="GoTTC app">
+  <meta name="author" content="Gregry Pike & Diego Escalante">
+  <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, target-densitydpi=device-dpi">
+  <link rel="stylesheet" href="new.css?v=1.0">
+</head>
+<body ng-controller="MainCtrl">
+
+<div class="container">
+
+<section id="settings" ng-class="{'hide-pane': tab!='settings'}">
+
+  <div class="localize-elements">
+
+  <header>
+    <h1>
+      Settings
+    </h1>
+  </header>
+<br><br><br><br><br><br><br><br><br><br><br>
+  <button ng-click="tab='nearest'">Nearest</button>
+
+  </div>
+
+</section>
+
+<section id="nearest" ng-class="{'hide-for-settings': tab=='settings', 'hide-for-favourites': tab=='favourites'}">
+
+  <div class="localize-elements">
+
+  <header>
+    <a class="icon-settings" ng-click="tab='settings'"></a>
+    <h1 
+      ng-bind="currentIntersection.name" 
+      ng-click="changeIntersectionRequest=!changeIntersectionRequest"
+      class="nearby-stops">
+    </h1>
+  </header>
+
+  <footer>
+    <a ng-click="tab='favourites'">Favourites</a>
+  </footer>
+
+  </div>
+
+</section>
+
+<section id="favourites" ng-class="{'hide-pane': tab!='favourites'}">
+
+  <div class="localize-elements">
+
+  <header>
+    <h1>
+      Favourites
+    </h1>
+  </header>
+
+  <br><br><br><br><br><br><br><br><br><br><br>
+  <button ng-click="tab='nearest'">Nearest</button>
+
+  </div>
+
+</section>
+
+</div>
+
+
+
+
+
+  <script src="js/lib/underscore-min.js"></script>
+  <script src="js/lib/angular.min.js"></script>
+  <script src="js/lib/moment.min.js"></script>
+  <script src="js/lib/iscroll.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/controllers/main.js"></script>
+  <script src="js/services/ttc-store.js"></script>
+  <script src="js/services/user-service.js"></script>
+  <script src="js/services/favourites-service.js"></script>
+  <script src="js/services/location-service.js"></script>
+  <script src="js/directives/intersection-time.js"></script>
+  <script src="js/directives/go-ttc-map.js"></script>
+  <script src="js/directives/iscroll.js"></script>
+  <script src="js/directives/favourite-station.js"></script>
+  <script src="js/directives/loading.js"></script>
+  <script src="js/filters.js"></script>
+
+<!-- <div 
+  loading 
+  show-loading="fullScreenLoading" 
+  class="full-screen-loading"
+  ng-class="{'loading-loaded': fullScreenLoading}">
+</div>
+<div class="modal-overlay" ng-class="{'loading-loaded': fullScreenLoading}"></div>
+ -->
+</body>
+</html>
+
