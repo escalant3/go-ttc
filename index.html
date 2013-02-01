@@ -87,6 +87,10 @@
   </ul>
 </div>
 
+<div ng-show="tab=='settings'">
+  TODO Settings page
+</div>
+
 <footer>
   <a 
     href="" 
@@ -99,6 +103,12 @@
     ng-class="{'active': tab=='favourites'}">
     Favourites
   </a>
+  <a 
+    ng-click="tab='settings'" 
+    ng-class="{'active': tab=='settings'}">
+    Settings
+  </a>
+
 </footer>
 
 
