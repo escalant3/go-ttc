@@ -35,7 +35,7 @@
           </select>
         </li>
         <li ng-click="tab='nearest'" class="clickable">
-          Return to nearest
+          Return to map
         </li>
       </ul>
 
@@ -62,7 +62,7 @@
   </header>
 
   <div 
-    class="go-ttc-map" 
+    class="map" 
     go-ttc-map 
     longitude="longitude" 
     latitude="latitude">
@@ -78,7 +78,7 @@
     id="search-intersections"
     ng-class="{'hide-pane': subtab!='search'}">
     <strong>Search for an intersection</strong>
-    <input type="text">
+    <div intersection-search></div>
   </div>
 
   <div 
@@ -87,6 +87,7 @@
     <strong ng-bind="currentIntersection.name"></strong>
     <p>Switch to another intersection?</p>
     <ul iscroll id="wrapper">
+      <li class="alt"><div intersection-search></div></li>
       <li
         ng-repeat="i in nearby" 
         ng-click="changeCurrentIntersection(i)"
@@ -122,34 +123,31 @@
 
 </div>
 
+<script src="js/lib/underscore-min.js"></script>
+<script src="js/lib/angular.min.js"></script>
+<script src="js/lib/moment.min.js"></script>
+<script src="js/lib/iscroll.js"></script>
+<script src="js/app.js"></script>
+<script src="js/controllers/main.js"></script>
+<script src="js/services/ttc-store.js"></script>
+<script src="js/services/user-service.js"></script>
+<script src="js/services/favourites-service.js"></script>
+<script src="js/services/location-service.js"></script>
+<script src="js/directives/intersection-time.js"></script>
+<script src="js/directives/go-ttc-map.js"></script>
+<script src="js/directives/iscroll.js"></script>
+<script src="js/directives/favourite-station.js"></script>
+<script src="js/directives/loading.js"></script>
+<script src="js/directives/intersection-search.js"></script>
+<script src="js/filters.js"></script>
 
-
-
-
-  <script src="js/lib/underscore-min.js"></script>
-  <script src="js/lib/angular.min.js"></script>
-  <script src="js/lib/moment.min.js"></script>
-  <script src="js/lib/iscroll.js"></script>
-  <script src="js/app.js"></script>
-  <script src="js/controllers/main.js"></script>
-  <script src="js/services/ttc-store.js"></script>
-  <script src="js/services/user-service.js"></script>
-  <script src="js/services/favourites-service.js"></script>
-  <script src="js/services/location-service.js"></script>
-  <script src="js/directives/intersection-time.js"></script>
-  <script src="js/directives/go-ttc-map.js"></script>
-  <script src="js/directives/iscroll.js"></script>
-  <script src="js/directives/favourite-station.js"></script>
-  <script src="js/directives/loading.js"></script>
-  <script src="js/filters.js"></script>
-
-<!-- <div 
+<div 
   loading 
   show-loading="fullScreenLoading" 
   class="full-screen-loading"
   ng-class="{'loading-loaded': fullScreenLoading}">
 </div>
--->
+
 <div class="modal-overlay" ng-class="{'loading-loaded': fullScreenLoading}"></div>
 
 </body>

@@ -22,7 +22,7 @@ angular.module('GoTTC')
                 function refreshMap() {
                     scope.mapSrc = 'http://maps.googleapis.com/maps/api/staticmap?center=' +
                                     scope.latitude + ',' + scope.longitude +
-                                    '&zoom=18&size=' + userService.viewportWidth + 'x' + parseInt(userService.viewportHeight - 80, 10) + '&maptype=roadmap&sensor=false';
+                                    '&zoom=18&size=' + userService.viewportWidth + 'x' + parseInt(userService.viewportHeight - 30, 10) + '&maptype=roadmap&sensor=false';
                 }
 
             }

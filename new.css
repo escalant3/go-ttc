@@ -288,9 +288,24 @@ footer {
   margin: 10px 10px 5px 10px;
 }
 
-#search-intersections input {
-  width: 90%;
+#search-intersections .search-wrapper {
   margin: 0 10px;
+}
+
+.search-wrapper {
+  line-height: 30px;
+}
+
+.search-wrapper input {
+  width: 70%;
+  border: 0 none;
+  border-radius: 5px;
+  height: 25px;
+  padding: 2px 5px;
+}
+
+.search-wrapper img {
+  vertical-align: middle;
 }
 
 /* NEARBY INTERSECTIONS
@@ -339,6 +354,19 @@ footer {
   font-size: 18px;
   padding: 10px;
   border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+#nearby-intersections li.alt {
+  background: rgba(0,0,0,0.2);
+}
+
+
+/* MAP
+========*/
+
+.map {
+  position: absolute;
+  top: 40px;
 }
 
 
