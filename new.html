@@ -84,7 +84,8 @@
   <div 
     id="nearby-intersections"
     ng-class="{'hide-pane': subtab!='nearby'}">
-    <strong>Other nearby intersections</strong>
+    <strong ng-bind="currentIntersection.name"></strong>
+    <p>Switch to another intersection?</p>
     <ul iscroll id="wrapper">
       <li
         ng-repeat="i in nearby" 

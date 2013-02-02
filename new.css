@@ -264,7 +264,7 @@ footer {
 ===========*/
 
 #search-intersections {
-  background: rgba(0,0,0,0.4);
+  background: rgba(0,0,0,0.6);
   position: absolute; 
   top: 0px; 
   left: 0px; 
@@ -280,10 +280,9 @@ footer {
   z-index: 10;
 }
 
-#search-intersections strong,
-#nearby-intersections strong {
+#search-intersections strong {
   display: block;
-  font-size: 14px;
+  font-size: 18px;
   font-weight: bold;
   color: rgba(255,255,255,0.8);
   margin: 10px 10px 5px 10px;
@@ -298,7 +297,7 @@ footer {
 =========================*/
 
 #nearby-intersections {
-  background: rgba(0,0,0,0.4);
+  background: rgba(0,0,0,0.6);
   position: absolute; 
   top: 0px; 
   left: 0px; 
@@ -315,11 +314,31 @@ footer {
   z-index: 10;
 }
 
+#nearby-intersections strong {
+  display: block;
+  font-size: 18px;
+  font-weight: bold;
+  color: rgba(255,255,255,1);
+  margin: 10px 10px 5px 10px;
+}
+
+#nearby-intersections p {
+  font-size: 14px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.7);
+  margin: 5px 10px;
+}
+
+#nearby-intersections ul {
+  border-top: 1px solid rgba(0,0,0,0.1);
+  margin-top: 10px;
+}
+
 #nearby-intersections li {
   color: #fff;
-  font-size: 14px;
-  padding: 5px 10px;
-  border-bottom: 1px solid #ccc;
+  font-size: 18px;
+  padding: 10px;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
 }
 
 
