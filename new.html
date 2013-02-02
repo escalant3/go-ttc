@@ -52,18 +52,49 @@
   <div class="localize-elements">
 
   <header>
-    <a class="icon-settings" ng-click="tab='settings'"></a>
+    <a class="icon-settings" ng-click="togglePane('settings')"></a>
     <h1 
       ng-bind="currentIntersection.name" 
-      ng-click="changeIntersectionRequest=!changeIntersectionRequest"
+      ng-click="togglePane('nearby','subtab')"
       class="nearby-stops clickable">
     </h1>
-    <a class="icon-search" ng-click="subtab='search'"></a>
+    <a class="icon-search" ng-click="togglePane('search','subtab')"></a>
   </header>
 
+  <div 
+    class="go-ttc-map" 
+    go-ttc-map 
+    longitude="longitude" 
+    latitude="latitude">
+  </div>
+
   <footer>
-    <a class="icon-star" ng-click="tab='favourites'" title="Favourites"></a>
+    <a class="favourites-button" ng-click="tab='favourites'" title="Favourites">
+      <label ng-class="{'hide-label': hideFavouritesLabel}">Favourites</label>
+    </a>
   </footer>
+
+  <div 
+    id="search-intersections"
+    ng-class="{'hide-pane': subtab!='search'}">
+    <strong>Search for an intersection</strong>
+    <input type="text">
+  </div>
+
+  <div 
+    id="nearby-intersections"
+    ng-class="{'hide-pane': subtab!='nearby'}">
+    <strong>Other nearby intersections</strong>
+    <ul iscroll id="wrapper">
+      <li
+        ng-repeat="i in nearby" 
+        ng-click="changeCurrentIntersection(i)"
+        class="list-option clickable"
+        ng-class-even="'alt'">
+        {{ i.name }}
+      </li>
+    </ul>
+  </div>
 
   </div>
 
@@ -86,12 +117,6 @@
 
   </div>
 
-</section>
-
-<section 
-  id="search-intersections"
-  ng-class="{'hide-pane': subtab!='search'}">
-  SEARCH<a ng-click="subtab=''">X</a>
 </section>
 
 </div>

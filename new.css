@@ -110,6 +110,7 @@ footer {
   position: absolute;
   bottom: 0;
   left: 0;
+  z-index: 150;
 }
 
 .pane {
@@ -123,6 +124,7 @@ footer {
 .clickable, a {
   cursor: pointer;
   -webkit-tap-highlight-color: rgba(255, 255, 255, 0); /* Removes the coloured click on mobile */
+  text-decoration: none;
 }
 
 
@@ -134,7 +136,7 @@ footer {
   position: absolute; 
   top: 0px; 
   left: 0px; 
-  width: 320px; 
+  width: 100%; 
   min-height: 100%; 
   transition: all 400ms ease 0s ; 
   z-index: 100; 
@@ -142,11 +144,11 @@ footer {
 }
 #nearest.hide-for-settings {
   z-index: 10;
-  transform: translate3d(270px, 0px, 0px);
+  transform: translate3d(80%, 0px, 0px);
 }
 #nearest.hide-for-favourites {
   z-index: 10;
-  transform: translate3d(-320px, 0px, 0px);
+  transform: translate3d(-100%, 0px, 0px);
 }
 
 #nearest .icon-settings {
@@ -167,7 +169,11 @@ footer {
 }
 
 #nearest h1 {
-  padding-right: 40px;
+  padding-right: 30px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: none;
+  max-width: 65%;
 }
 
 #nearest footer {
@@ -176,12 +182,15 @@ footer {
   background: rgba(0,0,0,0.8);
 }
 
-#nearest .icon-star {
-  width: 40px;
+#nearest .favourites-button {
+  padding: 0 10px 0 40px;
+  line-height: 40px;
   height: 40px;
   float: right;
-  /*border-left: 1px solid #444;*/
-  background: url('img/icon-star.png') no-repeat center center;
+  background: url('img/icon-star.png') no-repeat left center;
+  color: #fff;
+  font-size: 18px;
+  font-weight: bold;
 }
 
 
@@ -196,14 +205,14 @@ footer {
   top: 0px; 
   left: 0px; 
   min-height: 100%; 
-  width: 270px; 
+  width: 80%; 
   transition: all 400ms ease 0s ; 
   z-index: 100; 
   transform: translate3d(0px, 0px, 0px);
 }
 
 #settings.hide-pane {
-  transform: translate3d(-320px, 0px, 0px);
+  transform: translate3d(-80%, 0px, 0px);
   z-index: 10
 }
 
@@ -239,7 +248,7 @@ footer {
   position: absolute; 
   top: 0px; 
   left: 0px; 
-  width: 320px; 
+  width: 100%;
   min-height: 100%; 
   transition: all 400ms ease 0s ; 
   z-index: 100;
@@ -247,7 +256,7 @@ footer {
 }
 
 #favourites.hide-pane {
-  transform: translate3d(320px, 0px, 0px);
+  transform: translate3d(100%, 0px, 0px);
   z-index: 10;
 }
 
@@ -255,22 +264,62 @@ footer {
 ===========*/
 
 #search-intersections {
-  background: rgba(0,0,0,0.8);
-  box-shadow: 0 5px 10px -5px rgba(0, 0, 0, 0.3) inset;
-  color: #FFFFFF;
+  background: rgba(0,0,0,0.4);
   position: absolute; 
   top: 0px; 
   left: 0px; 
-  width: 320px; 
+  width: 100%; 
   height: 80px;
   transition: all 400ms ease 0s ; 
-  z-index: 100;
+  z-index: 120;
   transform: translate3d(0px, 40px, 0px);
 }
 
 #search-intersections.hide-pane {
   transform: translate3d(0px, -80px, 0px);
   z-index: 10;
+}
+
+#search-intersections strong,
+#nearby-intersections strong {
+  display: block;
+  font-size: 14px;
+  font-weight: bold;
+  color: rgba(255,255,255,0.8);
+  margin: 10px 10px 5px 10px;
+}
+
+#search-intersections input {
+  width: 90%;
+  margin: 0 10px;
+}
+
+/* NEARBY INTERSECTIONS
+=========================*/
+
+#nearby-intersections {
+  background: rgba(0,0,0,0.4);
+  position: absolute; 
+  top: 0px; 
+  left: 0px; 
+  width: 100%; 
+  transition: all 800ms ease 0s ; 
+  z-index: 120;
+  transform: translate3d(0px, 40px, 0px);
+}
+
+#nearby-intersections.hide-pane {
+  transform: translate3d(0px, -80px, 0px);
+  height: 80px;
+  overflow: hidden;
+  z-index: 10;
+}
+
+#nearby-intersections li {
+  color: #fff;
+  font-size: 14px;
+  padding: 5px 10px;
+  border-bottom: 1px solid #ccc;
 }
 
 

@@ -3,7 +3,7 @@ angular.module('GoTTC')
     'userService',
     function(userService) {
         return {
-            template: '<img ng-src="{{mapSrc}}"/>',
+            template: '<img ng-src="{{mapSrc}}">',
             link: function(scope, elem, attrs) {
                 scope.$watch(attrs.longitude, function(value) {
                     if (!!value) {

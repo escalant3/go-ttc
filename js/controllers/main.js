@@ -16,7 +16,12 @@ angular.module('GoTTC')
 
         $scope.$on('gottc.store.nearby.changed', function(msg, data) {
           //$rootScope.fullScreenLoading = true
-          $scope.nearby = data;
+          var nearby_stops = data;
+          
+          if (_.size(nearby_stops)>6) {
+           nearby_stops = nearby_stops.splice(0, 6)// Math.max(nearby_stops.length-6,0));
+          }
+          $scope.nearby = nearby_stops;
           $scope.currentIntersection = ttcStore.getCurrentIntersection(data);
         });
 
@@ -31,7 +36,20 @@ angular.module('GoTTC')
             $scope.currentIntersection = intersection;
             $scope.longitude = intersection.lng;
             $scope.latitude = intersection.lat;
-            $scope.changeIntersectionRequest = false;
+            $scope.togglePane('nearby','subtab');
+        };
+
+        $scope.togglePane = function(pane, type) {
+            
+            if (!type) {
+                type = 'tab';
+            }
+
+            if ($scope[type]===pane) {
+                $scope[type] = '';
+                return;
+            }
+            $scope[type] = pane;
         };
 
         $scope.$watch('currentIntersection', function(value) {
