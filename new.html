@@ -62,15 +62,49 @@
   </header>
 
   <div 
+  class="map-area" 
+  ng-show="tab=='nearest'" 
+  ng-click="changeIntersectionRequest=false">
+  <div 
     class="map" 
     go-ttc-map 
     longitude="longitude" 
     latitude="latitude">
+    <div 
+      intersection-time 
+      class="stop tl" 
+      ng-show="stopHeadingSouthTime" 
+      stop-time="stopHeadingSouthTime" 
+      direction="south">
+    </div>
+    <div 
+      intersection-time 
+      class="stop tr" 
+      ng-show="stopHeadingWestTime" 
+      stop-time="stopHeadingWestTime" 
+      direction="west">
+    </div>
+    <div 
+      intersection-time 
+      class="stop bl" 
+      ng-show="stopHeadingEastTime" 
+      stop-time="stopHeadingEastTime" 
+      direction="east">
+    </div>
+    <div 
+      intersection-time 
+      class="stop br" 
+      ng-show="stopHeadingNorthTime" 
+      stop-time="stopHeadingNorthTime" 
+      direction="north">
+    </div>
+    <img ng-src="{{mapSrc}}">
   </div>
+</div>
 
   <footer>
     <a class="favourites-button" ng-click="tab='favourites'" title="Favourites">
-      <label ng-class="{'hide-label': hideFavouritesLabel}">Favourites</label>
+      <label ng-class="{'hide-label': hideFavouritesLabel}" class="clickable">Favourites</label>
     </a>
   </footer>
 
