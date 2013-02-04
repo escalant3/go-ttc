@@ -34,7 +34,7 @@
             <option value="favourites">Favourites stops</option>
           </select>
         </li>
-        <li ng-click="tab='nearest'" class="clickable">
+        <li ng-click="togglePane('nearest')" class="clickable">
           Return to map
         </li>
       </ul>
@@ -62,50 +62,50 @@
   </header>
 
   <div 
-  class="map-area" 
-  ng-show="tab=='nearest'" 
-  ng-click="changeIntersectionRequest=false">
-  <div 
-    class="map" 
-    go-ttc-map 
-    longitude="longitude" 
-    latitude="latitude">
+    class="map-area" 
+    ng-show="tab=='nearest'" 
+    ng-click="changeIntersectionRequest=false">
     <div 
-      intersection-time 
-      class="stop tl" 
-      ng-show="stopHeadingSouthTime" 
-      stop-time="stopHeadingSouthTime" 
-      direction="south">
+      class="map" 
+      go-ttc-map 
+      longitude="longitude" 
+      latitude="latitude">
+      <div 
+        intersection-time 
+        class="stop tl" 
+        ng-show="stopHeadingSouthTime" 
+        stop-time="stopHeadingSouthTime" 
+        direction="south">
+      </div>
+      <div 
+        intersection-time 
+        class="stop tr" 
+        ng-show="stopHeadingWestTime" 
+        stop-time="stopHeadingWestTime" 
+        direction="west">
+      </div>
+      <div 
+        intersection-time 
+        class="stop bl" 
+        ng-show="stopHeadingEastTime" 
+        stop-time="stopHeadingEastTime" 
+        direction="east">
+      </div>
+      <div 
+        intersection-time 
+        class="stop br" 
+        ng-show="stopHeadingNorthTime" 
+        stop-time="stopHeadingNorthTime" 
+        direction="north">
+      </div>
+      <!-- <img src="img/icon-marker.png" style="z-index: 200; height: 25px; position: absolute; top: 48%; left: 50%;"> -->
+      <img ng-src="{{mapSrc}}">
     </div>
-    <div 
-      intersection-time 
-      class="stop tr" 
-      ng-show="stopHeadingWestTime" 
-      stop-time="stopHeadingWestTime" 
-      direction="west">
-    </div>
-    <div 
-      intersection-time 
-      class="stop bl" 
-      ng-show="stopHeadingEastTime" 
-      stop-time="stopHeadingEastTime" 
-      direction="east">
-    </div>
-    <div 
-      intersection-time 
-      class="stop br" 
-      ng-show="stopHeadingNorthTime" 
-      stop-time="stopHeadingNorthTime" 
-      direction="north">
-    </div>
-    <!-- <img src="img/icon-marker.png" style="z-index: 200; height: 25px; position: absolute; top: 48%; left: 50%;"> -->
-    <img ng-src="{{mapSrc}}">
   </div>
-</div>
 
   <footer>
     <a class="refresh-button" title="Refresh"></a>
-    <a class="favourites-button" ng-click="tab='favourites'" title="Favourites">
+    <a class="favourites-button" ng-click="togglePane('favourites')" title="Favourites">
       <label ng-class="{'hide-label': hideFavouritesLabel}" class="clickable">Favourites</label>
     </a>
   </footer>
@@ -150,8 +150,22 @@
     </h1>
   </header>
 
-  <br><br><br><br><br><br><br><br><br><br><br>
-  <button ng-click="tab='nearest'">Nearest</button>
+   <ul class="intersections">
+    <li
+      favourite-station
+      station="fav"
+      ng-repeat="fav in favourites" 
+      class="list-option clickable"
+      ng-click="getFavouriteTime(fav)"
+      ng-class-even="'alt'">
+    </li>
+  </ul>
+
+  <footer>
+    <a class="nearby-button"  ng-click="togglePane('nearest')" title="Favourites">
+      <label class="clickable">Nearby Intersections</label>
+    </a>
+  </footer>
 
   </div>
 
