@@ -98,11 +98,13 @@
       stop-time="stopHeadingNorthTime" 
       direction="north">
     </div>
+    <!-- <img src="img/icon-marker.png" style="z-index: 200; height: 25px; position: absolute; top: 48%; left: 50%;"> -->
     <img ng-src="{{mapSrc}}">
   </div>
 </div>
 
   <footer>
+    <a class="refresh-button" title="Refresh"></a>
     <a class="favourites-button" ng-click="tab='favourites'" title="Favourites">
       <label ng-class="{'hide-label': hideFavouritesLabel}" class="clickable">Favourites</label>
     </a>
