@@ -7,127 +7,189 @@
   <meta name="author" content="Gregry Pike & Diego Escalante">
   <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, target-densitydpi=device-dpi">
   <link rel="stylesheet" href="styles.css?v=1.0">
-  <!--[if lt IE 9]>
-  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-  <![endif]-->
 </head>
 <body ng-controller="MainCtrl">
 
-<header>
-  <img src="img/go-ttc-icon.png" class="gottc">
-  <h1 
-    ng-bind="currentIntersection.name" 
-    ng-click="changeIntersectionRequest=!changeIntersectionRequest">
-  </h1>
-</header>
+<div class="container">
 
-<div iscroll id="wrapper" ng-show="changeIntersectionRequest">
-  <ul class="nearby-intersections">
-    <li
-      ng-repeat="i in nearby" 
-      ng-show="changeIntersectionRequest" 
-      ng-click="changeCurrentIntersection(i)"
-      class="list-option"
-      ng-class-even="'alt'">
-    {{ i.name }}
-    </li>
-  </ul>
-</div>
+<section 
+  id="settings" 
+  ng-class="{'hide-pane': tab!='settings'}">
 
-<div 
-  class="map" 
-  ng-show="tab=='nearest'" 
-  ng-click="changeIntersectionRequest=false">
-  <div 
-    intersection-time 
-    class="stop tl" 
-    ng-show="stopHeadingSouthTime" 
-    stop-time="stopHeadingSouthTime" 
-    direction="south">
-  </div>
-  <div 
-    intersection-time 
-    class="stop tr" 
-    ng-show="stopHeadingWestTime" 
-    stop-time="stopHeadingWestTime" 
-    direction="west">
-  </div>
-  <div 
-    intersection-time 
-    class="stop bl" 
-    ng-show="stopHeadingEastTime" 
-    stop-time="stopHeadingEastTime" 
-    direction="east">
-  </div>
-  <div 
-    intersection-time 
-    class="stop br" 
-    ng-show="stopHeadingNorthTime" 
-    stop-time="stopHeadingNorthTime" 
-    direction="north">
-  </div>
-  <div 
-    class="go-ttc-map" 
-    go-ttc-map 
-    longitude="longitude" 
-    latitude="latitude">
-  </div>
-</div>
+  <div class="localize-elements">
 
-<div ng-show="tab=='favourites'">
-  <ul class="nearby-intersections">
+    <header>
+      <h1>
+        Settings
+      </h1>
+    </header>
+
+    <div class="pane">
+
+      <ul>
+        <li>
+          <strong>Default start</strong>
+          <select>
+            <option value="nearest">Nearest stops</option>
+            <option value="favourites">Favourites stops</option>
+          </select>
+        </li>
+        <li ng-click="togglePane('nearest')" class="clickable">
+          Return to map
+        </li>
+      </ul>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section 
+  id="nearest" 
+  ng-class="{'hide-for-settings': tab=='settings', 'hide-for-favourites': tab=='favourites'}">
+
+  <div class="localize-elements">
+
+  <header>
+    <a class="icon-settings" ng-click="togglePane('settings')"></a>
+    <h1 
+      ng-bind="currentIntersection.name" 
+      ng-click="togglePane('nearby','subtab')"
+      class="nearby-stops clickable">
+    </h1>
+    <a class="icon-search" ng-click="togglePane('search','subtab')"></a>
+  </header>
+
+  <div 
+    class="map-area" 
+    ng-show="tab=='nearest'" 
+    ng-click="changeIntersectionRequest=false">
+    <div 
+      class="map" 
+      go-ttc-map 
+      longitude="longitude" 
+      latitude="latitude">
+      <div 
+        intersection-time 
+        class="stop tl" 
+        ng-show="stopHeadingSouthTime" 
+        stop-time="stopHeadingSouthTime" 
+        direction="south">
+      </div>
+      <div 
+        intersection-time 
+        class="stop tr" 
+        ng-show="stopHeadingWestTime" 
+        stop-time="stopHeadingWestTime" 
+        direction="west">
+      </div>
+      <div 
+        intersection-time 
+        class="stop bl" 
+        ng-show="stopHeadingEastTime" 
+        stop-time="stopHeadingEastTime" 
+        direction="east">
+      </div>
+      <div 
+        intersection-time 
+        class="stop br" 
+        ng-show="stopHeadingNorthTime" 
+        stop-time="stopHeadingNorthTime" 
+        direction="north">
+      </div>
+      <!-- <img src="img/icon-marker.png" style="z-index: 200; height: 25px; position: absolute; top: 48%; left: 50%;"> -->
+      <img ng-src="{{mapSrc}}">
+    </div>
+  </div>
+
+  <footer>
+    <a class="refresh-button" title="Refresh"></a>
+    <a class="favourites-button" ng-click="togglePane('favourites')" title="Favourites">
+      <label ng-class="{'hide-label': hideFavouritesLabel}" class="clickable">Favourites</label>
+    </a>
+  </footer>
+
+  <div 
+    id="search-intersections"
+    ng-class="{'hide-pane': subtab!='search'}">
+    <strong>Search for an intersection</strong>
+    <div intersection-search></div>
+  </div>
+
+  <div 
+    id="nearby-intersections"
+    ng-class="{'hide-pane': subtab!='nearby'}">
+    <strong ng-bind="currentIntersection.name"></strong>
+    <p>Switch to another intersection?</p>
+    <ul iscroll id="wrapper">
+      <li class="alt"><div intersection-search></div></li>
+      <li
+        ng-repeat="i in nearby" 
+        ng-click="changeCurrentIntersection(i)"
+        class="list-option clickable"
+        ng-class-even="'alt'">
+        {{ i.name }}
+      </li>
+    </ul>
+  </div>
+
+  </div>
+
+</section>
+
+<section 
+  id="favourites" 
+  ng-class="{'hide-pane': tab!='favourites'}">
+
+  <div class="localize-elements">
+
+  <header>
+    <h1>
+      Favourites
+    </h1>
+  </header>
+
+   <ul class="intersections">
     <li
       favourite-station
       station="fav"
       ng-repeat="fav in favourites" 
-      class="list-option"
+      class="list-option clickable"
       ng-click="getFavouriteTime(fav)"
       ng-class-even="'alt'">
     </li>
   </ul>
+
+  <footer>
+    <a class="nearby-button"  ng-click="togglePane('nearest')" title="Favourites">
+      <label class="clickable">Nearby Intersections</label>
+    </a>
+  </footer>
+
+  </div>
+
+</section>
+
 </div>
 
-<div ng-show="tab=='settings'">
-  TODO Settings page
-</div>
-
-<footer>
-  <a 
-    href="" 
-    ng-click="tab='nearest'" 
-    ng-class="{'active': tab=='nearest'}">
-    Nearest
-  </a>
-  <a 
-    ng-click="tab='favourites'" 
-    ng-class="{'active': tab=='favourites'}">
-    Favourites
-  </a>
-  <a 
-    ng-click="tab='settings'" 
-    ng-class="{'active': tab=='settings'}">
-    Settings
-  </a>
-
-</footer>
-
-
-  <script src="js/lib/underscore-min.js"></script>
-  <script src="js/lib/angular.min.js"></script>
-  <script src="js/lib/moment.min.js"></script>
-  <script src="js/lib/iscroll.js"></script>
-  <script src="js/app.js"></script>
-  <script src="js/controllers/main.js"></script>
-  <script src="js/services/ttc-store.js"></script>
-  <script src="js/services/user-service.js"></script>
-  <script src="js/services/favourites-service.js"></script>
-  <script src="js/services/location-service.js"></script>
-  <script src="js/directives/intersection-time.js"></script>
-  <script src="js/directives/go-ttc-map.js"></script>
-  <script src="js/directives/iscroll.js"></script>
-  <script src="js/directives/favourite-station.js"></script>
-  <script src="js/directives/loading.js"></script>
-  <script src="js/filters.js"></script>
+<script src="js/lib/underscore-min.js"></script>
+<script src="js/lib/angular.min.js"></script>
+<script src="js/lib/moment.min.js"></script>
+<script src="js/lib/iscroll.js"></script>
+<script src="js/app.js"></script>
+<script src="js/controllers/main.js"></script>
+<script src="js/services/ttc-store.js"></script>
+<script src="js/services/user-service.js"></script>
+<script src="js/services/favourites-service.js"></script>
+<script src="js/services/location-service.js"></script>
+<script src="js/directives/intersection-time.js"></script>
+<script src="js/directives/go-ttc-map.js"></script>
+<script src="js/directives/iscroll.js"></script>
+<script src="js/directives/favourite-station.js"></script>
+<script src="js/directives/loading.js"></script>
+<script src="js/directives/intersection-search.js"></script>
+<script src="js/filters.js"></script>
 
 <div 
   loading 
@@ -135,6 +197,7 @@
   class="full-screen-loading"
   ng-class="{'loading-loaded': fullScreenLoading}">
 </div>
+
 <div class="modal-overlay" ng-class="{'loading-loaded': fullScreenLoading}"></div>
 
 </body>
