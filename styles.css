@@ -65,7 +65,8 @@ body {
 
 .container {
   position: relative; 
-  overflow: hidden; 
+  overflow: hidden;
+  max-width: 640px;
   min-height: 100%;
 }
 
