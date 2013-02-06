@@ -137,6 +137,10 @@ footer {
   text-decoration: none;
 }
 
+.subtab {
+  background: rgba(0,0,0,0.8);
+}
+
 
 /* NEAREST
 ============*/
@@ -358,7 +362,6 @@ footer {
 ===========*/
 
 #search-intersections {
-  background: rgba(0,0,0,0.6);
   position: absolute; 
   top: 0px; 
   left: 0px; 
@@ -385,11 +388,11 @@ footer {
   font-size: 18px;
   font-weight: bold;
   color: rgba(255,255,255,0.8);
-  margin: 10px 10px 5px 10px;
+  padding: 10px 10px 5px 10px;
 }
 
 #search-intersections .search-wrapper {
-  margin: 0 10px;
+  padding: 0 10px 15px 10px;
 }
 
 .search-wrapper {
@@ -413,7 +416,6 @@ footer {
 =========================*/
 
 #nearby-intersections {
-  background: rgba(0,0,0,0.6);
   position: absolute; 
   top: 0px; 
   left: 0px; 
@@ -447,7 +449,7 @@ footer {
   font-size: 18px;
   font-weight: bold;
   color: rgba(255,255,255,1);
-  margin: 10px 10px 5px 10px;
+  padding: 10px 10px 5px 10px;
 }
 
 #nearby-intersections p {

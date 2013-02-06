@@ -113,25 +113,29 @@
   <div 
     id="search-intersections"
     ng-class="{'hide-pane': subtab!='search'}">
-    <strong>Search for an intersection</strong>
-    <div intersection-search></div>
+    <div class="subtab">
+      <strong>Search for an intersection</strong>
+      <div intersection-search></div>
+    </div>
   </div>
 
   <div 
     id="nearby-intersections"
     ng-class="{'hide-pane': subtab!='nearby'}">
-    <strong ng-bind="currentIntersection.name"></strong>
-    <p>Switch to another intersection?</p>
-    <ul iscroll id="wrapper">
-      <li class="alt"><div intersection-search></div></li>
-      <li
-        ng-repeat="i in nearby" 
-        ng-click="changeCurrentIntersection(i)"
-        class="list-option clickable"
-        ng-class-even="'alt'">
-        {{ i.name }}
-      </li>
-    </ul>
+    <div class="subtab">
+      <strong ng-bind="currentIntersection.name"></strong>
+      <p>Switch to another intersection?</p>
+      <ul iscroll id="wrapper">
+        <li class="alt"><div intersection-search></div></li>
+        <li
+          ng-repeat="i in nearby" 
+          ng-click="changeCurrentIntersection(i)"
+          class="list-option clickable"
+          ng-class-even="'alt'">
+          {{ i.name }}
+        </li>
+      </ul>
+    </div>
   </div>
 
   </div>
