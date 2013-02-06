@@ -2,9 +2,13 @@ angular.module('GoTTC')
 .filter('getRouteName',function() {
     return function(name) {
         if (!name) return '';
-        positionOfTo = name.toLowerCase().indexOf(' to ');
-        if (positionOfTo < 0) return name;
-        return name.substr(0,positionOfTo);
+        // Queen to Neville Park
+        delimiter = name.toLowerCase().indexOf(' to ');
+        if (delimiter >= 0) return name.substr(0,delimiter);
+        // Westbound on College
+        delimiter = name.toLowerCase().indexOf(' on ');
+        if (delimiter >= 0) return name.substr(delimiter+4);
+        return name; 
     };
 })
 .filter('capitalize', function() {

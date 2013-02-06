@@ -327,14 +327,16 @@ footer {
 #favourites .intersections {
   position: absolute;
   top: 40px;
+  width: 100%;
 }
 
 #favourites .intersections li {
-  color: #444444;
+  color: rgba(92,163,23,1);
   font-size: 18px;
-  padding: 10px;
   background: rgba(92,163,23,0.25);
   border-bottom: 1px solid rgba(0,0,0,0.1);
+  width: 100%;
+  height: 40px;
 }
 
 #favourites .intersections li.alt {
@@ -360,13 +362,49 @@ footer {
 
 #favourites .direction {
   display: inline-block;
-  width: 50px;
-  border-right: 1px solid #ccc;
+  height: 40px;
+  border-right: 1px solid rgba(0,0,0,0.05);
+  /*padding: 10px 0 10px 10px;*/
+  float: left;
+  position: relative;
+  overflow: hidden;
 }
 
-#favourites .stop-name,
+#favourites .direction .letter {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  opacity: 0.35;
+  z-index: -10;
+  font-weight: bold;
+  font-size: 68px;
+  width: 80px;
+  height: 80px;
+  margin: -40px 0 0 -40px;
+  text-align: center;
+  line-height: 80px;
+  color: #454545;
+}
+
+#favourites .direction .compass {
+  margin: 10px;
+  z-index: 100;
+}
+
+#favourites .stop-name {
+  display: inline-block;
+  padding: 10px;
+  float; left;
+}
+
 #favourites .times {
   display: inline-block;
+  width: 34px;
+  padding: 10px;
+  float: right;
+  text-align: center;
+  color: #454545;
+  border-left: 1px solid rgba(0,0,0,0.05);
 }
 
 /* SEARCH

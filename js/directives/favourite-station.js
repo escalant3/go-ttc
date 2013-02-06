@@ -4,7 +4,8 @@ angular.module('GoTTC')
     'ttcStore',
     'configurationService',
     'locationService',
-    function($timeout, ttcStore, configurationService, locationService) {
+    '$filter',
+    function($timeout, ttcStore, configurationService, locationService, $filter) {
       return {
         templateUrl: '/js/templates/favourite-station.html',
         scope: true,
@@ -14,10 +15,23 @@ angular.module('GoTTC')
 
           var abbreviateTime = function(humanizedTime) {
             var number = 1;
-            debugger;
+
+            if (!humanizedTime) return null;
+
+            if (humanizedTime.match(/hour/)) {
+              if (humanizedTime.match(/\b\d+\b/g)) number = humanizedTime.match(/\b\d+\b/g)[0];
+              return number+"h";
+            }
+            // The next vehicle is not hours away. Let's try minutes
+            number = 1;
             if (humanizedTime.match(/minute/)) {
-              if (humanizedTime.match(/\b\d\b/g)) number = humanizedTime.match(/\b\d\b/g);
+              if (humanizedTime.match(/\b\d+\b/g)) number = humanizedTime.match(/\b\d+\b/g);
               return number+"m";
+            }
+            number = 1;
+            if (humanizedTime.match(/second/)) {
+              if (humanizedTime.match(/\b\d+\b/g)) number = humanizedTime.match(/\b\d+\b/g);
+              return number+"s";
             }
           };
 
@@ -25,7 +39,7 @@ angular.module('GoTTC')
             if (!!value) {
               _station = value;
               
-              scope.name = _station.name;
+              scope.name = $filter('getRouteName')(_station.name);
               scope.uri = value.uri;
               
               direction = ttcStore.getDirection(value.uri);
@@ -34,8 +48,9 @@ angular.module('GoTTC')
     
               scope.$on('gottc.store.station-times.changed' + scope.uri, function(msg, value) {
                 if (!!value) {
-                  abbreviateTime(value[0]);
-                  scope.nextOne = value[0];
+                  debugger;
+                  scope.firstVehicleEta = abbreviateTime(value[0]);
+                  scope.secondVehicleEta = abbreviateTime(value[1]);
                 }
               });
 
