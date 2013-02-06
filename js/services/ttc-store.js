@@ -69,7 +69,7 @@ angular.module('GoTTC')
                     _.each(stop.routes, function(route) {
                       minTime = Math.min(minTime, route.stop_times[0].departure_timestamp);
                     });
-                    times.push(moment.unix(minTime).fromNow());
+                    times.push(moment.unix(minTime).format('dddd'));
                     $rootScope.$broadcast('gottc.store.station-times.changed' + station.uri, times);
                   }
                 });
@@ -81,7 +81,8 @@ angular.module('GoTTC')
             getNearby: getNearby,
             getCurrentIntersection: getCurrentIntersection,
             getIntersectionTimes: getIntersectionTimes,
-            getStopTime: getStopTime
+            getStopTime: getStopTime,
+            getDirection: extractDirection
         };
     }
 ]);

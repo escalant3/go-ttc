@@ -1,1 +1,7 @@
-{{ name }} <strong>{{ nextOne}}</strong><span ng-click="removeFromFavourites()">X</span>
+<div class="direction">
+  <img ng-src="{{compassUrl}}" ng-show="compassUrl" height="18"> {{directionAbbr}}
+</div>
+<div class="stop-name">{{ name }}</div>
+<div class="times">!{{nextOne}}!</div>
+
+<!-- <img ng-src="{{compassUrl}}" ng-show="compassUrl" height="18"> {{directionAbbr}} |  <strong>{{ nextOne}}</strong><span ng-click="removeFromFavourites()">X</span> -->

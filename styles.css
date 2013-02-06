@@ -358,6 +358,17 @@ footer {
   font-weight: bold;
 }
 
+#favourites .direction {
+  display: inline-block;
+  width: 50px;
+  border-right: 1px solid #ccc;
+}
+
+#favourites .stop-name,
+#favourites .times {
+  display: inline-block;
+}
+
 /* SEARCH
 ===========*/
 
