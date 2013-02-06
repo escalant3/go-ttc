@@ -1,12 +1,14 @@
 angular.module('GoTTC')
-.service('favouritesService', [
+.service('configurationService', [
     function() {
       var _initialized = false;
       var _goTTC;
       
       function initialize() {
         var initialValues = {
-          config: {},
+          config: {
+            landing: 'nearest'
+          },
           favourites: []
         };
         if (!localStorage.getItem('goTTC')) {
@@ -19,7 +21,7 @@ angular.module('GoTTC')
         _initialized = true;
       }
 
-      function add(station) {
+      function addFavourite(station) {
         var stationCopy, favouriteExists;
         if (!_initialized) initialize();
         // TODO Check it is not already there
@@ -34,12 +36,12 @@ angular.module('GoTTC')
         }
       }
 
-      function get() {
+      function getFavourites() {
         if (!_initialized) initialize();
         return _goTTC.favourites;
       }
 
-      function remove(station) {
+      function removeFavourite(station) {
         if (!_initialized) initialize();
 
         _.each(_goTTC.favourites, function(favourite, index) {
@@ -56,10 +58,21 @@ angular.module('GoTTC')
         localStorage.setItem('goTTC', JSON.stringify(_goTTC));
       }
 
+      function setLandingPage(value) {
+        _goTTC.config.landing = value;
+        save();
+      }
+
+      function getLandingPage(value) {
+        return  _goTTC.config.landing || 'nearest';
+      }
+
       return {
-        add: add,
-        get: get,
-        remove: remove
+        addFavourite: addFavourite,
+        getFavourites: getFavourites,
+        removeFavourite: removeFavourite,
+        getLandingPage: getLandingPage,
+        setLandingPage: setLandingPage
       };
     }
 ]);

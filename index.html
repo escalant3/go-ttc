@@ -29,7 +29,7 @@
       <ul>
         <li>
           <strong>Default start</strong>
-          <select>
+          <select ng-model="landingPage">
             <option value="nearest">Nearest stops</option>
             <option value="favourites">Favourites stops</option>
           </select>
@@ -181,7 +181,7 @@
 <script src="js/controllers/main.js"></script>
 <script src="js/services/ttc-store.js"></script>
 <script src="js/services/user-service.js"></script>
-<script src="js/services/favourites-service.js"></script>
+<script src="js/services/configuration-service.js"></script>
 <script src="js/services/location-service.js"></script>
 <script src="js/directives/intersection-time.js"></script>
 <script src="js/directives/go-ttc-map.js"></script>

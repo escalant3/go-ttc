@@ -2,8 +2,8 @@ angular.module('GoTTC')
 .directive('favouriteStation', [
     '$timeout',
     'ttcStore',
-    'favouritesService',
-    function($timeout, ttcStore, favouritesService) {
+    'configurationService',
+    function($timeout, ttcStore, configurationService) {
       return {
         template: '{{ name }} <strong>{{ nextOne}}</strong><span ng-click="removeFromFavourites()">X</span>',
         scope: true,
@@ -28,7 +28,7 @@ angular.module('GoTTC')
           });
 
           scope.removeFromFavourites = function() {
-            favouritesService.remove(_station);
+            configurationService.removeFavourite(_station);
           };
 
           $timeout(function() {

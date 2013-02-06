@@ -1,8 +1,8 @@
 angular.module('GoTTC')
 .directive('intersectionTime', [
     '$filter',
-    'favouritesService',
-    function($filter, favouritesService) {
+    'configurationService',
+    function($filter, configurationService) {
       return {
         scope: true,
         template: '<strong class="route" ng-bind="stopName | getRouteName"></strong><br>' +
@@ -35,7 +35,7 @@ angular.module('GoTTC')
             scope.compassUrl = getCompassUrl(scope.direction);
 
             scope.addToFavourites = function() {
-              favouritesService.add(_stopInfo);
+              configurationService.addFavorite(_stopInfo);
             };
 
        }

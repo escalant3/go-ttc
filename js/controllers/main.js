@@ -3,13 +3,12 @@ angular.module('GoTTC')
     '$scope',
     '$rootScope',
     'ttcStore',
-    'favouritesService',
+    'configurationService',
     'locationService',
-    function($scope, $rootScope, ttcStore, favouritesService, locationService) {
+    function($scope, $rootScope, ttcStore, configurationService, locationService) {
         $scope.DEBUG = true;
 
         $scope.name = "GoTTC!";
-        $scope.tab = "nearest";
         $scope.subtab = "";
 
         $rootScope.fullScreenLoading = false;
@@ -58,7 +57,7 @@ angular.module('GoTTC')
             }
         });
 
-        $scope.favourites = favouritesService.get();
+        $scope.favourites = configurationService.getFavourites();
 
         // Update the favourites as soon as a new one is added
         $scope.$on('gottc.favourites.changed', function(msg, data) {
@@ -78,6 +77,14 @@ angular.module('GoTTC')
         $scope.getFavouriteTime = function(station) {
             ttcStore.getStopTime(station);
         };
- 
+
+        $scope.$watch('landingPage', function(value) {
+          if (!!value) {
+            configurationService.setLandingPage(value);
+          }
+        });
+
+        $scope.landingPage = configurationService.getLandingPage();
+        $scope.tab = $scope.landingPage;
     }
 ]);
