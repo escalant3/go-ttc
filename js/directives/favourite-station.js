@@ -5,7 +5,7 @@ angular.module('GoTTC')
     'configurationService',
     function($timeout, ttcStore, configurationService) {
       return {
-        template: '{{ name }} <strong>{{ nextOne}}</strong><span ng-click="removeFromFavourites()">X</span>',
+        templateUrl: '/js/templates/favourite-station.html',
         scope: true,
         link: function(scope, elem, attrs) {
           var _station;
