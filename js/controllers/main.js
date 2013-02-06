@@ -10,6 +10,8 @@ angular.module('GoTTC')
 
         $scope.name = "GoTTC!";
         $scope.subtab = "";
+        $scope.latitude = "43.649724";
+        $scope.longitude = "-79.397142";
 
         $rootScope.fullScreenLoading = false;
 
@@ -18,7 +20,7 @@ angular.module('GoTTC')
           var nearby_stops = data;
           
           if (_.size(nearby_stops)>6) {
-           nearby_stops = nearby_stops.splice(0, 6)// Math.max(nearby_stops.length-6,0));
+           nearby_stops = nearby_stops.splice(0, 6);
           }
           $scope.nearby = nearby_stops;
           $scope.currentIntersection = ttcStore.getCurrentIntersection(data);

@@ -2,7 +2,8 @@ angular.module('GoTTC')
 .directive('intersectionTime', [
     '$filter',
     'configurationService',
-    function($filter, configurationService) {
+	'locationService',
+    function($filter, configurationService, locationService) {
       return {
         scope: true,
         template: '<strong class="route" ng-bind="stopName | getRouteName"></strong><br>' +
