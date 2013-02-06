@@ -375,6 +375,8 @@ footer {
 }
 
 #search-intersections.hide-pane {
+  max-height: 40px;
+  overflow: hidden;
   -webkit-transform: translate3d(0px, -80px, 0px);
   -moz-transform: translate3d(0px, -80px, 0px);
   -o-transform: translate3d(0px, -80px, 0px);
@@ -459,19 +461,19 @@ footer {
   margin: 5px 10px;
 }
 
-#nearby-intersections ul {
+.intersection-search ul {
   border-top: 1px solid rgba(0,0,0,0.1);
   margin-top: 10px;
 }
 
-#nearby-intersections li {
+.intersection-search li {
   color: #fff;
   font-size: 18px;
   padding: 10px;
   border-bottom: 1px solid rgba(0,0,0,0.1);
 }
 
-#nearby-intersections li.alt {
+.intersection-search li.alt {
   background: rgba(0,0,0,0.2);
 }
 

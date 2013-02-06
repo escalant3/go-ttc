@@ -1,0 +1,14 @@
+<li class="alt">
+  <div class="search-wrapper">
+    <input type="text" ng-model="searchText">
+    <img src="img/icon-search.png">
+  </div>
+</li>
+<li
+  ng-repeat="i in intersections | filter:searchText" 
+  ng-click="intersectionClicked(i)"
+  class="list-option clickable"
+  ng-class-even="'alt'">
+  {{ i.name }}
+</li>
+

@@ -23,6 +23,7 @@ module.exports = function(grunt) {
           'js/lib/*.js',
           'js/*.js',
           'js/controllers/*.js',
+          'js/values/*.js',
           'js/services/*.js',
           'js/directives/*js'
         ],

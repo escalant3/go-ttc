@@ -33,12 +33,13 @@ angular.module('GoTTC')
             $scope.stopHeadingNorthTime = data.north;
         });
 
-        $scope.changeCurrentIntersection = function(intersection) {
+
+        $scope.$on('gottc.intersection.changed', function(msg, intersection) {
             $scope.currentIntersection = intersection;
             $scope.longitude = intersection.lng;
             $scope.latitude = intersection.lat;
             $scope.togglePane('nearby','subtab');
-        };
+        });
 
         $scope.togglePane = function(pane, type) {
             
