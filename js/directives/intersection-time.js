@@ -2,12 +2,12 @@ angular.module('GoTTC')
 .directive('intersectionTime', [
     '$filter',
     'configurationService',
-	'locationService',
+    'locationService',
     function($filter, configurationService, locationService) {
       return {
         scope: true,
         template: '<strong class="route" ng-bind="stopName | getRouteName"></strong><br>' +
-                  '<strong><img ng-src="{{compassUrl}}" ng-show="compassUrl" height="18"> {{direction}}</strong>'+ 
+                  '<strong><img ng-src="{{compassUrl}}" ng-show="compassUrl" height="18"> {{direction}}</strong>'+
                   '<br>{{ firstTime }}<br>{{ secondTime }}' +
                   '<div ng-click="addToFavourites()" class="favourite-link"><img src="img/favorite.png" height="12"> Save</div>',
 
@@ -28,15 +28,10 @@ angular.module('GoTTC')
                 }
             });
 
-            var getCompassUrl = function (direction) {
-                if (!direction) return null;
-                return 'img/' + direction.toLowerCase() + '.png';
-            };
-
-            scope.compassUrl = getCompassUrl(scope.direction);
+            scope.compassUrl = locationService.getCompassUrl(scope.direction);
 
             scope.addToFavourites = function() {
-              configurationService.addFavorite(_stopInfo);
+              configurationService.addFavourite(_stopInfo);
             };
 
        }
