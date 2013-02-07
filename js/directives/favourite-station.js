@@ -48,9 +48,10 @@ angular.module('GoTTC')
     
               scope.$on('gottc.store.station-times.changed' + scope.uri, function(msg, value) {
                 if (!!value) {
-                  debugger;
                   scope.firstVehicleEta = abbreviateTime(value[0]);
-                  scope.secondVehicleEta = abbreviateTime(value[1]);
+                  if (!!value[1] && abbreviateTime(value[0]) !== abbreviateTime(value[1])) {
+                    scope.secondVehicleEta = abbreviateTime(value[1]);
+                  }
                 }
               });
 

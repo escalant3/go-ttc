@@ -65,11 +65,16 @@ angular.module('GoTTC')
                 var times = [];
                 _.each(response.stops, function(stop) {
                   if (stop.uri === station.uri) {
-                    var minTime = Number.MAX_VALUE;
+                    var minTime = Number.MAX_VALUE,
+                        secondTime = null;
                     _.each(stop.routes, function(route) {
                       minTime = Math.min(minTime, route.stop_times[0].departure_timestamp);
+                      if (!!route.stop_times[1]) {
+                        secondTime = route.stop_times[1].departure_timestamp;
+                      }
                     });
                     times.push(moment.unix(minTime).fromNow());
+                    times.push(moment.unix(secondTime).fromNow());
                     $rootScope.$broadcast('gottc.store.station-times.changed' + station.uri, times);
                   }
                 });

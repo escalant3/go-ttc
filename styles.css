@@ -569,13 +569,13 @@ footer {
 }
 
 .map .stop.bl {
-  bottom: 65px;
+  bottom: 60px;
   left: 5px;
   border-top-right-radius: 30px;
 }
 
 .map .stop.br {
-  bottom: 65px;
+  bottom: 60px;
   right: 5px;
   text-align: right;
   border-top-left-radius: 30px;
