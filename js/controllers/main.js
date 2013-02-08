@@ -19,8 +19,8 @@ angular.module('GoTTC')
           //$rootScope.fullScreenLoading = true
           var nearby_stops = data;
           
-          if (_.size(nearby_stops)>6) {
-           nearby_stops = nearby_stops.splice(0, 6);
+          if (_.size(nearby_stops)>5) {
+           nearby_stops = nearby_stops.splice(0, 5);
           }
           $scope.nearby = nearby_stops;
           $scope.currentIntersection = ttcStore.getCurrentIntersection(data);
