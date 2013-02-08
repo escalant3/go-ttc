@@ -393,18 +393,32 @@ footer {
 
 #favourites .stop-name {
   display: inline-block;
-  padding: 10px;
+  line-height: 40px;
   float; left;
 }
 
 #favourites .times {
   display: inline-block;
-  width: 34px;
-  padding: 10px;
+  width: 54px;
+  height: 40px;
   float: right;
   text-align: center;
   color: #454545;
   border-left: 1px solid rgba(0,0,0,0.05);
+}
+
+#favourites .times .first {
+  margin-top: 6px;
+}
+
+#favourites .times .only {
+  margin: 0;
+  line-height: 40px; 
+}
+
+#favourites .times .second {
+  color: rgba(92,163,23,1);
+  font-size: 10px;
 }
 
 /* SEARCH

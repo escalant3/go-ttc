@@ -4,7 +4,7 @@
 </div>
 <div class="stop-name">{{ name }}</div>
 <div class="times">
-	<div class="first">
+	<div class="first" ng-class="{'only':!secondVehicleEta}">
 		{{firstVehicleEta}}
 	</div>
 	<div class="second">
