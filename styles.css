@@ -181,7 +181,8 @@ footer {
   transform: translate3d(-100%, 0px, 0px);
 }
 
-#nearest .icon-settings {
+#nearest .icon-settings,
+#favourites .icon-settings {
   display: inline-block;
   width: 30px;
   height: 40px;
@@ -320,6 +321,10 @@ footer {
   z-index: 10;
 }
 
+#nearest h1 {
+  padding-right: 30px;
+}
+
 .favourite-link {
   color: #ffe920
 }
@@ -363,11 +368,13 @@ footer {
 #favourites .direction {
   display: inline-block;
   height: 40px;
+  width: 30px;
+  line-height: 40px;
   border-right: 1px solid rgba(0,0,0,0.05);
-  /*padding: 10px 0 10px 10px;*/
   float: left;
   position: relative;
   overflow: hidden;
+  text-align: center;
 }
 
 #favourites .direction .letter {
@@ -387,7 +394,7 @@ footer {
 }
 
 #favourites .direction .compass {
-  margin: 10px;
+  margin-top: 10px;
   z-index: 100;
 }
 
@@ -395,6 +402,7 @@ footer {
   display: inline-block;
   line-height: 40px;
   float; left;
+  margin: 0 10px;
 }
 
 #favourites .times {

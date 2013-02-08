@@ -8,13 +8,24 @@ angular.module('GoTTC')
             scope: true,
             link: function(scope, elem, attrs) {
              
+              var limitIntersections = function(intersections, limit) {
+                if (!intersections) return null;
+
+                if (_.size(intersections)>limit) {
+                  intersections = intersections.splice(0, limit);
+                }
+                return intersections;
+              };
+
               // Custom stations
               if (attrs.intersections) {
                 scope.$watch(attrs.intersections, function(nearby_stops) {
-                  if (_.size(nearby_stops)>5) {
-                    nearby_stops = nearby_stops.splice(0, 5);
+                  if (!!nearby_stops) {
+                    scope.intersections = limitIntersections(nearby_stops, 5);
                   }
-                  scope.intersections = nearby_stops;
+                  else {
+                    scope.intersections = null;
+                  }
                 }, true);
 
               // All the stations
@@ -27,6 +38,14 @@ angular.module('GoTTC')
               scope.$watch('searchText', function(query) {
                 if (!!query) {
                   scope.intersections = _.filter(stationDirectory.concat(intersectionDirectory), function(intersection){ return intersection.name.toLowerCase().indexOf(query.toLowerCase())===0; });
+                }
+                else {
+                  if (!!attrs.intersections) {
+                    scope.intersections = limitIntersections(scope.$eval(attrs.intersections), 5);
+                  }
+                  else {
+                    scope.intersections = null;
+                  }
                 }
               });
 
