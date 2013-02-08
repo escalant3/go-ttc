@@ -1,7 +1,8 @@
 angular.module('GoTTC')
 .directive('intersectionSearch', [
     'stationDirectory',
-    function(stationDirectory) {
+    'intersectionDirectory',
+    function(stationDirectory, intersectionDirectory) {
         return {
             templateUrl: '/js/templates/intersection-search.html',
             scope: true,
@@ -15,7 +16,14 @@ angular.module('GoTTC')
 
               // All the stations
               } else if (attrs.all) {
+                // Show just the subways by default
                 scope.intersections = stationDirectory;
+                // If they start typing show all intersections
+                scope.$watch('searchText', function(query) {
+                  if (!!query) {
+                    scope.intersections = _.filter(stationDirectory.concat(intersectionDirectory), function(intersection){ return intersection.name.indexOf(query)===0; });
+                  }
+                });
               }
 
               scope.intersectionClicked = function(station) {
