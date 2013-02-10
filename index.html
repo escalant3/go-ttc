@@ -61,7 +61,46 @@
     <a class="icon-search" ng-click="togglePane('search','subtab')"></a>
   </header>
 
-  <div 
+  <div class="map-wrapper">
+    <div 
+      map-of-stops 
+      class="map"
+      longitude="longitude" 
+      latitude="latitude">
+    </div>
+
+    <div 
+      intersection-time 
+      class="stop tl" 
+      ng-show="stopHeadingSouthTime" 
+      stop-time="stopHeadingSouthTime" 
+      direction="south">
+    </div>
+    <div 
+      intersection-time 
+      class="stop tr" 
+      ng-show="stopHeadingWestTime" 
+      stop-time="stopHeadingWestTime" 
+      direction="west">
+    </div>
+    <div 
+      intersection-time 
+      class="stop bl" 
+      ng-show="stopHeadingEastTime" 
+      stop-time="stopHeadingEastTime" 
+      direction="east">
+    </div>
+    <div 
+      intersection-time 
+      class="stop br" 
+      ng-show="stopHeadingNorthTime" 
+      stop-time="stopHeadingNorthTime" 
+      direction="north">
+    </div>
+
+  </div>
+
+  <!-- <div 
     class="map-area" 
     ng-show="tab=='nearest'" 
     ng-click="changeIntersectionRequest=false">
@@ -97,11 +136,12 @@
         ng-show="stopHeadingNorthTime" 
         stop-time="stopHeadingNorthTime" 
         direction="north">
-      </div>
+      </div> -->
       <!-- <img src="img/icon-marker.png" style="z-index: 200; height: 25px; position: absolute; top: 48%; left: 50%;"> -->
-      <img ng-src="{{mapSrc}}">
-    </div>
-  </div>
+      
+      <!-- <img ng-src="{{mapSrc}}"> -->
+<!--     </div>
+  </div> -->
 
   <footer>
     <a class="refresh-button" title="Refresh"></a>
@@ -174,6 +214,7 @@
 <script src="js/lib/underscore-min.js"></script>
 <script src="js/lib/angular.min.js"></script>
 <script src="js/lib/moment.min.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false"></script>
 <script src="js/lib/iscroll.js"></script>
 <script src="js/app.js"></script>
 <script src="js/values/stations.js"></script>
@@ -190,13 +231,14 @@
 <script src="js/directives/favourite-station.js"></script>
 <script src="js/directives/loading.js"></script>
 <script src="js/directives/intersection-search.js"></script>
+<script src="js/directives/map-of-stops.js"></script>
 <script src="js/filters.js"></script>
 
 <div 
   loading 
   show-loading="fullScreenLoading" 
   class="full-screen-loading"
-  ng-class="{'loading-loaded': fullScreenLoading}">
+  ng-class="{'loading-loaded': fullScreenLoading, 'not-loading': !fullScreenLoading}">
 </div>
 
 <div class="modal-overlay" ng-class="{'loading-loaded': fullScreenLoading}"></div>
