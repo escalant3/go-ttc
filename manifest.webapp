@@ -4,9 +4,9 @@
   "description": "The ultimate TTC app",
   "launch_path": "/index.html",
   "icons": {
-    "16": "/img/go-ttc-icon.png",
-    "48": "/img/go-ttc-icon.png",
-    "128": "/img/go-ttc-icon.png"
+    "16": "/img/go-ttc-16.png",
+    "48": "/img/go-ttc-64.png",
+    "128": "/img/go-ttc-128.png"
   },
   "developer": {
     "name": "Gregory Pike and Diego Escalante",

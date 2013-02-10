@@ -18,9 +18,10 @@ angular.module('GoTTC')
         //setInterval(getLocation, GEOLOCATION_REFRESH_INTERVAL);
       }
 
-      function getCompassUrl (direction) {
+      function getCompassUrl (direction, size) {
           if (!direction) return null;
-          return 'img/' + direction.toLowerCase() + '.png';
+          if (!size) size = 32;
+          return 'img/compass-' + direction.toLowerCase() + '-' + size + '.png';
       }
 
       return {
