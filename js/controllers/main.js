@@ -13,10 +13,9 @@ angular.module('GoTTC')
         $scope.latitude = "43.649724";
         $scope.longitude = "-79.397142";
 
-        $rootScope.fullScreenLoading = false;
+        $rootScope.fullScreenLoading = true;
 
         $scope.$on('gottc.store.nearby.changed', function(msg, data) {
-          //$rootScope.fullScreenLoading = true
           var nearby_stops = data;
 
           $scope.nearby = nearby_stops;

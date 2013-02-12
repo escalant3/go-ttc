@@ -626,7 +626,7 @@ footer {
   bottom: 0;
   width: 0;
   height: 0;
-  background-color: rgba(204,204,204,0.5);
+  background-color: rgba(25,25,25,0.5);
   opacity: 0;
   -webkit-transition: opacity 0.25s ease-in;
   -moz-transition: opacity 0.25s ease-in;
@@ -638,15 +638,15 @@ footer {
 .modal-overlay.loading-loaded {
   width: 100%;
   height: 100%;
-  z-index: 99;
+  z-index: 100;
 }
 
 .full-screen-loading {
   position: absolute;
-  top: 50%;
-  left: 50%;
+  top: 49%;
+  left: 49%;
   margin: -40px 0 0 -40px;
-  z-index: 100;
+  z-index: 101;
   opacity: 0;
   -webkit-transition: opacity 0.25s ease-in;
   -moz-transition: opacity 0.25s ease-in;
