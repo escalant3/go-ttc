@@ -381,10 +381,10 @@ footer {
   position: absolute;
   top: 50%;
   left: 50%;
-  opacity: 0.35;
+  opacity: 0.25;
   z-index: -10;
   font-weight: bold;
-  font-size: 68px;
+  font-size: 54px;
   width: 80px;
   height: 80px;
   margin: -40px 0 0 -40px;
@@ -394,7 +394,7 @@ footer {
 }
 
 #favourites .direction .compass {
-  margin-top: 10px;
+  margin-top: 8px;
   z-index: 100;
 }
 
