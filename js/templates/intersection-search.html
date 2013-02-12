@@ -4,11 +4,9 @@
     <img src="img/icon-search.png">
   </div>
 </li>
-<li
-  ng-repeat="i in intersections | filter:searchText" 
-  ng-click="intersectionClicked(i)"
-  class="list-option clickable"
-  ng-class-even="'alt'">
-  {{ i.name }}
-</li>
+<div iscroll class="scrollable-list"
+    elements="intersections"
+    click-on-element="intersectionClicked"
+    filter="searchText">
+</div>
 

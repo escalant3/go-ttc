@@ -7,7 +7,7 @@ angular.module('GoTTC')
             templateUrl: '/js/templates/intersection-search.html',
             scope: true,
             link: function(scope, elem, attrs) {
-             
+
               var limitIntersections = function(intersections, limit) {
                 if (!intersections) return null;
 

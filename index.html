@@ -12,8 +12,8 @@
 
 <div class="container">
 
-<section 
-  id="settings" 
+<section
+  id="settings"
   ng-class="{'hide-pane': tab!='settings'}">
 
   <div class="localize-elements">
@@ -45,16 +45,16 @@
 
 </section>
 
-<section 
-  id="nearest" 
+<section
+  id="nearest"
   ng-class="{'hide-for-settings': tab=='settings', 'hide-for-favourites': tab=='favourites'}">
 
   <div class="localize-elements">
 
   <header>
     <a class="icon-settings" ng-click="togglePane('settings')"></a>
-    <h1 
-      ng-bind="currentIntersection.name" 
+    <h1
+      ng-bind="currentIntersection.name"
       ng-click="togglePane('nearby','subtab')"
       class="nearby-stops clickable">
     </h1>
@@ -62,83 +62,83 @@
   </header>
 
   <div class="map-wrapper">
-    <div 
-      map-of-stops 
+    <div
+      map-of-stops
       class="map"
-      longitude="longitude" 
+      longitude="longitude"
       latitude="latitude">
     </div>
 
-    <div 
-      intersection-time 
-      class="stop tl" 
-      ng-show="stopHeadingSouthTime" 
-      stop-time="stopHeadingSouthTime" 
+    <div
+      intersection-time
+      class="stop tl"
+      ng-show="stopHeadingSouthTime"
+      stop-time="stopHeadingSouthTime"
       direction="south">
     </div>
-    <div 
-      intersection-time 
-      class="stop tr" 
-      ng-show="stopHeadingWestTime" 
-      stop-time="stopHeadingWestTime" 
+    <div
+      intersection-time
+      class="stop tr"
+      ng-show="stopHeadingWestTime"
+      stop-time="stopHeadingWestTime"
       direction="west">
     </div>
-    <div 
-      intersection-time 
-      class="stop bl" 
-      ng-show="stopHeadingEastTime" 
-      stop-time="stopHeadingEastTime" 
+    <div
+      intersection-time
+      class="stop bl"
+      ng-show="stopHeadingEastTime"
+      stop-time="stopHeadingEastTime"
       direction="east">
     </div>
-    <div 
-      intersection-time 
-      class="stop br" 
-      ng-show="stopHeadingNorthTime" 
-      stop-time="stopHeadingNorthTime" 
+    <div
+      intersection-time
+      class="stop br"
+      ng-show="stopHeadingNorthTime"
+      stop-time="stopHeadingNorthTime"
       direction="north">
     </div>
 
   </div>
 
-  <!-- <div 
-    class="map-area" 
-    ng-show="tab=='nearest'" 
+  <!-- <div
+    class="map-area"
+    ng-show="tab=='nearest'"
     ng-click="changeIntersectionRequest=false">
-    <div 
-      class="map" 
-      go-ttc-map 
-      longitude="longitude" 
+    <div
+      class="map"
+      go-ttc-map
+      longitude="longitude"
       latitude="latitude">
-      <div 
-        intersection-time 
-        class="stop tl" 
-        ng-show="stopHeadingSouthTime" 
-        stop-time="stopHeadingSouthTime" 
+      <div
+        intersection-time
+        class="stop tl"
+        ng-show="stopHeadingSouthTime"
+        stop-time="stopHeadingSouthTime"
         direction="south">
       </div>
-      <div 
-        intersection-time 
-        class="stop tr" 
-        ng-show="stopHeadingWestTime" 
-        stop-time="stopHeadingWestTime" 
+      <div
+        intersection-time
+        class="stop tr"
+        ng-show="stopHeadingWestTime"
+        stop-time="stopHeadingWestTime"
         direction="west">
       </div>
-      <div 
-        intersection-time 
-        class="stop bl" 
-        ng-show="stopHeadingEastTime" 
-        stop-time="stopHeadingEastTime" 
+      <div
+        intersection-time
+        class="stop bl"
+        ng-show="stopHeadingEastTime"
+        stop-time="stopHeadingEastTime"
         direction="east">
       </div>
-      <div 
-        intersection-time 
-        class="stop br" 
-        ng-show="stopHeadingNorthTime" 
-        stop-time="stopHeadingNorthTime" 
+      <div
+        intersection-time
+        class="stop br"
+        ng-show="stopHeadingNorthTime"
+        stop-time="stopHeadingNorthTime"
         direction="north">
       </div> -->
       <!-- <img src="img/icon-marker.png" style="z-index: 200; height: 25px; position: absolute; top: 48%; left: 50%;"> -->
-      
+
       <!-- <img ng-src="{{mapSrc}}"> -->
 <!--     </div>
   </div> -->
@@ -150,7 +150,7 @@
     </a>
   </footer>
 
-  <div 
+  <div
     id="search-intersections"
     class="intersection-search"
     ng-class="{'hide-pane': subtab!='search'}">
@@ -160,7 +160,7 @@
 	</div>
   </div>
 
-  <div 
+  <div
     id="nearby-intersections"
     class="intersection-search"
     ng-class="{'hide-pane': subtab!='nearby'}">
@@ -175,8 +175,8 @@
 
 </section>
 
-<section 
-  id="favourites" 
+<section
+  id="favourites"
   ng-class="{'hide-pane': tab!='favourites'}">
 
   <div class="localize-elements">
@@ -192,7 +192,7 @@
     <li
       favourite-station
       station="fav"
-      ng-repeat="fav in favourites" 
+      ng-repeat="fav in favourites"
       class="list-option clickable"
       ng-click="getFavouriteTime(fav)"
       ng-class-even="'alt'">
@@ -234,9 +234,9 @@
 <script src="js/directives/map-of-stops.js"></script>
 <script src="js/filters.js"></script>
 
-<div 
-  loading 
-  show-loading="fullScreenLoading" 
+<div
+  loading
+  show-loading="fullScreenLoading"
   class="full-screen-loading"
   ng-class="{'loading-loaded': fullScreenLoading, 'not-loading': !fullScreenLoading}">
 </div>
