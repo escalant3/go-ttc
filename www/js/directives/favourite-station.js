@@ -7,7 +7,7 @@ angular.module('GoTTC')
     '$filter',
     function($timeout, ttcStore, configurationService, locationService, $filter) {
       return {
-        templateUrl: '/js/templates/favourite-station.html',
+        templateUrl: 'js/templates/favourite-station.html',
         scope: true,
         link: function(scope, elem, attrs) {
           var _station,
@@ -38,14 +38,14 @@ angular.module('GoTTC')
           scope.$watch(attrs.station, function(value) {
             if (!!value) {
               _station = value;
-              
+
               scope.name = $filter('getRouteName')(_station.name);
               scope.uri = value.uri;
-              
+
               direction = ttcStore.getDirection(value.uri);
               scope.compassUrl = locationService.getCompassUrl(direction);
               scope.directionAbbr = direction.charAt(0).toUpperCase();
-    
+
               scope.$on('gottc.store.station-times.changed' + scope.uri, function(msg, value) {
                 if (!!value) {
                   scope.firstVehicleEta = abbreviateTime(value[0]);

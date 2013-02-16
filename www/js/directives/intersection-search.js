@@ -4,7 +4,7 @@ angular.module('GoTTC')
     'intersectionDirectory',
     function(stationDirectory, intersectionDirectory) {
         return {
-            templateUrl: '/js/templates/intersection-search.html',
+            templateUrl: 'js/templates/intersection-search.html',
             scope: true,
             link: function(scope, elem, attrs) {
 

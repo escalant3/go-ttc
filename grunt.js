@@ -11,6 +11,17 @@ module.exports = function(grunt) {
         '* Copyright (c) <%= grunt.template.today("yyyy") %> ' +
         'Gregory Pike & Diego M. Escalante; Licensed MIT */'
     },
+    ngTemplates: {
+      GoTTC: {
+        simple: {
+          options: {
+            base: 'js/templates'
+          },
+          src: ['js/templates/favourite-station.html'],
+          dest: 'dist/templates.js'
+        }
+      }
+    },
     lint: {
       files: ['grunt.js', 'js/*.js', 'test/**/*.js']
     },
@@ -19,7 +30,7 @@ module.exports = function(grunt) {
     },
     concat: {
       dist: {
-        src: ['<banner:meta.banner>', 
+        src: ['<banner:meta.banner>',
           'js/lib/*.js',
           'js/*.js',
           'js/controllers/*.js',
@@ -40,6 +51,11 @@ module.exports = function(grunt) {
       files: '<config:lint.files>',
       tasks: 'lint qunit'
     },
+    server: {
+      base: './www',
+      port: 8000
+    },
+
     jshint: {
       options: {
         curly: true,
@@ -62,5 +78,32 @@ module.exports = function(grunt) {
   // Default task.
   grunt.registerTask('default', 'lint qunit concat min');
   grunt.registerTask('build', 'concat min');
+
+  grunt.registerTask('compile', function(){
+    var content,
+        destFile,
+        templateCode;
+
+    var FILES = [
+      "js/templates/favourite-station.html",
+      "js/templates/intersection-search.html",
+      "js/templates/settings-pane.html"
+    ];
+
+    destFile = "js/templates/templates.js";
+
+    templateCode = "angular.module('GoTTC').run(['$templateCache', function($templateCache) {";
+    for(var i=0 ; i < FILES.length ; i++) {
+
+      content = grunt.file.read("www/" + FILES[i]);
+      content = content.replace(/"/g, '\\"').replace(/\r?\n/g, '" +\n    "');
+      templateCode += "$templateCache.put(\"" + FILES[i] + "\", \"" + content + "\");";
+    }
+    templateCode += "}]);";
+
+    grunt.file.write(destFile, templateCode);
+
+  });
+
 
 };
