@@ -90,7 +90,7 @@ module.exports = function(grunt) {
       "js/templates/settings-pane.html"
     ];
 
-    destFile = "js/templates/templates.js";
+    destFile = "www/js/templates/templates.js";
 
     templateCode = "angular.module('GoTTC').run(['$templateCache', function($templateCache) {";
     for(var i=0 ; i < FILES.length ; i++) {
