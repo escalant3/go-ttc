@@ -22,7 +22,7 @@ time, mark, audio, video {
   font-size: 100%;
   font: inherit;
   vertical-align: baseline;
-  font-family: 'MozTT', sans-serif;
+  font-family: 'DroidSansRegular', Ariel, Helvetica, sans-serif;
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
@@ -95,7 +95,6 @@ h1 {
   margin: 0 10px;
   font-size: 18px;
   font-weight: bold;
-  font-family: sans-serif;
   overflow: hidden;
   text-overflow: elipsis;
   color: #fff;
@@ -673,7 +672,6 @@ footer {
 }
 
 .loading-message {
-  font-family: sans-serif;
   color: #999;
   font-size: 1.4px;
 }
