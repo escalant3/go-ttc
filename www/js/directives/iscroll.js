@@ -10,7 +10,7 @@ angular.module('GoTTC')
         },
         template: '<ul class="iscroll-list">' +
                   '<li ng-repeat="element in elements | filter: filter" ng-bind="element.name" ' +
-                  'class="iscroll-element" ng-class-even="\'alt\'" ' +
+                  'class="iscroll-element clickable" ng-class-even="\'alt\'" ' +
                   'ng-click="elementClicked(element)"></li></ul>',
         link: function(scope, elem, attrs) {
           var _iscrollObj;
