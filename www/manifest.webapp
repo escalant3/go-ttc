@@ -5,7 +5,8 @@
   "launch_path": "/index.html",
   "icons": {
     "16": "/img/go-ttc-16.png",
-    "48": "/img/go-ttc-64.png",
+    "48": "/img/go-ttc-48.png",
+    "64": "/img/go-ttc-64.png",
     "128": "/img/go-ttc-128.png"
   },
   "developer": {
