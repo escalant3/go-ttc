@@ -6,11 +6,16 @@ angular.module('GoTTC')
     function($filter, configurationService, locationService) {
       return {
         scope: true,
-        template: '<strong class="route" ng-bind="stopName | getRouteName"></strong><br>' +
-                  '<strong><img ng-src="{{compassUrl}}" ng-show="compassUrl" height="18"> {{direction}}</strong>'+
-                  '<br>{{ firstTime }}<br>{{ secondTime }}' +
-                  '<div ng-click="addToFavourites()" class="favourite-link"><img src="img/favorite.png" height="12"> Save</div>',
-
+        template: '<div class="times">' +
+                    '<div class="times-overflow">' +
+                      '<div class="primary-eta" ng-bind="firstTime | abbreviateTime"></div>' +
+                      '<div class="eta" ng-bind="secondTime | abbreviateTime"></div>' +
+                    '</div>' +
+                  '</div>' +
+                  '<div class="stop">' +
+                    '<img ng-src="{{compassUrl}}" ng-show="compassUrl" height="32">' +
+                    '<div class="route" ng-bind="stopName | getRouteName"></div>'+
+                  '</div>',
         link: function(scope, element, attrs) {
             var _stopInfo = null;
 
@@ -33,6 +38,10 @@ angular.module('GoTTC')
             scope.addToFavourites = function() {
               configurationService.addFavourite(_stopInfo);
             };
+
+            scope.directionClassName = function() {
+              return $scope.direction.toLowerCase() + 'bound';
+            }
 
        }
       };

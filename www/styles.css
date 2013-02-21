@@ -86,7 +86,7 @@ header {
   position: absolute;
   top: 0;
   left: 0;
-  background-color: #5ca317;
+  background-color: #3eb112;
   z-index: 150;
 }
 
@@ -196,6 +196,10 @@ footer {
   border-left: 1px solid #62ad18;
   background: url('img/icon-search.png') no-repeat center center;
   background-size: 20px 20px;
+}
+
+#nearest header {
+  border-bottom: 5px solid rgba(64, 151, 30, 1);
 }
 
 #nearest h1 {
@@ -551,62 +555,196 @@ footer {
 
 .map-wrapper {
   position: relative;
-  top: 40px;
+  top: 45px;
 }
 
-/*.map {
-  overflow: hidden;
-  position: relative;
-}*/
+.stop-wrapper {
+  width: 50%;
+}
 
 .map-wrapper .stop {
-  background: #4e8b14;
-  background: rgba(78,139,20,0.6);
-  color: #213b08;
-  position: absolute;
-  width: 30%;
-  font-size: 12px;
-  padding: 5px;
+  padding: 6px;
+  background: rgba(222, 222, 222, 0.8);
+  line-height: 32px;
+  position: relative;
 }
 
-.map-wrapper .stop:hover {
-  background: rgba(78,139,20,0.7);
-  cursor: pointer;
-}
-
-.map-wrapper .stop.tl {
-  top: 5px;
-  left: 5px;
-  border-bottom-right-radius: 30px;
-}
-
-.map-wrapper .stop.tr {
-  top: 5px;
-  right: 5px;
-  text-align: right;
-  border-bottom-left-radius: 30px;
-}
-
-.map-wrapper .stop.bl {
-  bottom: 20px;
-  left: 5px;
-  border-top-right-radius: 30px;
-}
-
-.map-wrapper .stop.br {
-  bottom: 20px;
-  right: 5px;
-  text-align: right;
-  border-top-left-radius: 30px;
-}
-
-.map-wrapper .stop strong {
+.map-wrapper .route {
   font-size: 14px;
-  color: #eee;
+  font-weight: bold;
+  color: #2d2d2d;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.map-wrapper .stop .route {
+.map-wrapper .stop .times {
+  line-height: 32px;
+  height: 36px;
+}
+
+.map-wrapper .stop img {
+  vertical-align: middle;
+  position: absolute;
+  top: 6px;
+  z-index: 2;
+}
+
+.stop-wrapper .times {
+  overflow: hidden;
+}
+
+.stop-wrapper .times-overflow {
+  width: 999px;
+  float: right;
+}
+
+.stop-wrapper .primary-eta {
+  display: inline-block;
+  padding: 6px 10px;
+  font-size: 24px;
+  background: rgba(222,222,222,0.8); /*rgba(64, 151, 30, 0.6);*/
+  color: #2d2d2d;
+  font-weight: bold;
+}
+
+.stop-wrapper .eta {
+  display: inline-block;
+  padding: 6px;
+  background: rgba(75,75,75,0.4);
   color: #fff;
+  font-size: 12px;
+}
+
+/* Westbound */
+.stop-wrapper.westbound {
+  top: 0;
+  right: 0;
+  position: absolute;
+}
+.stop-wrapper.westbound .stop {
+  top: -36px;
+  text-align: right;
+}
+.map-wrapper .westbound .route {
+  margin-right: 37px;
+}
+.map-wrapper .westbound .stop img {
+  right: 6px;
+}
+.stop-wrapper.westbound .times {
+  top: 44px;
+  position: relative;
+}
+.stop-wrapper.westbound .primary-eta {
+  border-bottom-left-radius: 10px;
+  float: right;
+}
+.stop-wrapper.westbound .eta,
+.stop-wrapper.westbound .times-overflow {
+  float: right;
+}
+.stop-wrapper.westbound .eta:last-child {
+  border-bottom-left-radius: 10px;
+}
+
+/* Southbound */
+.stop-wrapper.southbound {
+  top: 0;
+  left: 0;
+  position: absolute;
+}
+.stop-wrapper.southbound .stop {
+  top: -36px;
+}
+.map-wrapper .southbound .route {
+  margin-left: 37px;
+}
+.map-wrapper .southbound .stop img {
+  left: 6px;
+}
+.stop-wrapper.southbound .times {
+  top: 44px;
+  position: relative;
+}
+.stop-wrapper.southbound .primary-eta {
+  border-bottom-right-radius: 10px;
+  float: left;
+}
+.stop-wrapper.southbound .eta,
+.stop-wrapper.southbound .times-overflow {
+  float: left;
+}
+.stop-wrapper.southbound .eta:last-child {
+  border-bottom-right-radius: 10px;
+}
+
+/* Northbound */
+.map-wrapper .northbound {
+  bottom: 5px;
+  right: 0;
+  position: absolute;
+}
+.northbound .stop {
+  top: -15px;
+  text-align: right;
+}
+.map-wrapper .northbound .route {
+  margin-right: 37px;
+}
+.map-wrapper .northbound .stop img {
+  right: 6px;
+}
+.stop-wrapper.northbound .times {
+  top: -15px;
+  position: relative;
+}
+.stop-wrapper.northbound .primary-eta {
+  border-top-left-radius: 10px;
+  float: right;
+}
+.stop-wrapper.northbound .eta,
+.stop-wrapper.northbound .times-overflow {
+  float: right;
+}
+.stop-wrapper.northbound .eta:last-child {
+  border-top-left-radius: 10px;
+}
+
+/* Eastbound */
+.map-wrapper .eastbound {
+  bottom: 5px;
+  left: 0;
+  position: absolute;
+}
+.stop-wrapper.eastbound .stop {
+  top: -15px;
+}
+.map-wrapper .eastbound .route {
+  margin-left: 37px;
+}
+.map-wrapper .eastbound .stop img {
+  left: 6px;
+}
+.stop-wrapper.eastbound .times {
+  top: -15px;
+  position: relative;
+}
+.stop-wrapper.eastbound .primary-eta {
+  border-top-right-radius: 10px;
+  float: left;
+}
+.stop-wrapper.eastbound .eta,
+.stop-wrapper.eastbound .times-overflow {
+  float: left;
+}
+.stop-wrapper.eastbound .eta:last-child {
+  border-top-right-radius: 10px;
+}
+
+.stop-wrapper.northbound .eta,
+.stop-wrapper.eastbound .eta {
+  margin-top: 12px;
 }
 
 
