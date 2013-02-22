@@ -8,13 +8,13 @@ angular.module('GoTTC')
         scope: true,
         template: '<div class="times">' +
                     '<div class="times-overflow">' +
-                      '<div class="primary-eta" ng-bind="firstTime | abbreviateTime"></div>' +
-                      '<div class="eta" ng-bind="secondTime | abbreviateTime"></div>' +
+                      '<div class="primary-eta" ng-bind="firstTime | abbreviateTime"  ng-show="firstTime"></div>' +
+                      '<div class="eta" ng-bind="secondTime | abbreviateTime" ng-show="secondTime"></div>' +
                     '</div>' +
                   '</div>' +
                   '<div class="stop">' +
-                    '<img ng-src="{{compassUrl}}" ng-show="compassUrl" height="32">' +
-                    '<div class="route" ng-bind="stopName | getRouteName"></div>'+
+                    '<img ng-src="{{compassUrl}}" ng-show="compassUrl && firstTime" height="32">' +
+                    '<div class="route" ng-bind="stopName | getRouteName" ng-show="firstTime"></div>'+
                   '</div>',
         link: function(scope, element, attrs) {
             var _stopInfo = null;

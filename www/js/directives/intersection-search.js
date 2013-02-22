@@ -52,6 +52,15 @@ angular.module('GoTTC')
               scope.intersectionClicked = function(station) {
                 scope.$emit('gottc.intersection.changed', station);
               };
+
+              scope.isEmptyClass = function() {
+                // Temp ... need to figure this out
+                return '';
+                if (_.size($scope.intersections)>0) {
+                  return 'hide-iscroll';
+                }
+                return '';
+              }
             }
         };
     }
