@@ -53,6 +53,7 @@ table {
 
 /* END RESET */
 
+
 html,
 body {
   height: 100%;
@@ -139,6 +140,11 @@ footer {
   background: rgba(0,0,0,0.8);
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
+}
+
+.close-subtab {
+  float: right;
+  color: #fff;
 }
 
 
@@ -270,7 +276,8 @@ footer {
 }
 
 #settings header {
-  background: #3B3B3B;
+  background: #1b1b1b;
+  box-shadow: -5px 0 5px 0 rgba(0, 0, 0, 0.3) inset;
 }
 
 #settings .pane {
@@ -437,13 +444,13 @@ footer {
 
 #search-intersections {
   position: absolute;
-  top: 0px;
+  top: -40px;
   left: 0px;
   width: 100%;
   height: 80px;
   -webkit-transition: all 400ms ease 0s ;
   transition: all 400ms ease 0s ;
-  z-index: 120;
+  z-index: 151;
   -webkit-transform: translate3d(0px, 40px, 0px);
   transform: translate3d(0px, 40px, 0px);
 }
@@ -456,7 +463,7 @@ footer {
   -o-transform: translate3d(0px, -80px, 0px);
   -ms-transform: translate3d(0px, -80px, 0px);
   transform: translate3d(0px, -80px, 0px);
-  z-index: 10;
+  z-index: 150;
 }
 
 #search-intersections strong {
@@ -485,9 +492,9 @@ footer {
   height: 20px;
 }
 
-.scrollable-list {
+/*.scrollable-list {
   height: 300px;
-}
+}*/
 .scrollable-list.hide-iscroll {
   height: 0;
 }
@@ -497,7 +504,7 @@ footer {
 
 #nearby-intersections {
   position: absolute;
-  top: 0px;
+  top: -40px;
   left: 0px;
   width: 100%;
   -webkit-transition: all 800ms ease 0s ;
@@ -505,7 +512,7 @@ footer {
   -o-transition: all 800ms ease 0s ;
   -ms-transition: all 800ms ease 0s ;
   transition: all 800ms ease 0s ;
-  z-index: 120;
+  z-index: 150;
   -webkit-transform: translate3d(0px, 40px, 0px);
   -moz-transform: translate3d(0px, 40px, 0px);
   -o-transform: translate3d(0px, 40px, 0px);
@@ -521,7 +528,7 @@ footer {
   transform: translate3d(0px, -80px, 0px);
   height: 80px;
   overflow: hidden;
-  z-index: 10;
+  z-index: 150;
 }
 
 #nearby-intersections strong {

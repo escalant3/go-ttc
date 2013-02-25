@@ -18,7 +18,10 @@ angular.module('GoTTC')
                     }
                 });
 
-                elem.attr('id','map-of-stops-canvas').css('width',userService.viewportWidth+'px').css('height',parseInt(userService.viewportHeight - 65,10)+'px');
+                elem
+                    .attr('id','map-of-stops-canvas')
+                    .css('width',userService.viewportWidth+'px')
+                    .css('height',parseInt(userService.viewportHeight - 65,10)+'px');
 
                 var map;
 

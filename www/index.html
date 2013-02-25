@@ -109,8 +109,15 @@
     class="intersection-search"
     ng-class="{'hide-pane': subtab!='search'}">
 	<div class="subtab">
-	  <strong>Search for an intersection</strong>
-      <ul intersection-search all="yes"></ul>
+	  <strong>
+      Search for an intersection
+      <a 
+        class="clickable close-subtab"
+        ng-click="togglePane('','subtab')">
+        &times;
+      </a>
+    </strong>
+    <ul intersection-search all="yes"></ul>
 	</div>
   </div>
 
@@ -119,7 +126,14 @@
     class="intersection-search"
     ng-class="{'hide-pane': subtab!='nearby'}">
 	<div class="subtab">
-      <strong ng-bind="currentIntersection.name"></strong>
+      <strong>
+        <span ng-bind="currentIntersection.name"></span>
+        <a 
+          class="clickable close-subtab"
+          ng-click="togglePane('','subtab')">
+          &times;
+        </a>
+      </strong>
       <p>Switch to another intersection?</p>
       <ul intersection-search intersections="nearby"></ul>
 	</div>

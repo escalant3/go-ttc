@@ -20,10 +20,31 @@ angular.module('GoTTC')
             elem.attr('id', 'id_' + scope.$id);
           }
 
+          var getBodyElement = function (elem) {
+            var parent = elem.parent();
+            var tagName = parent[0].tagName;
+            
+            if (!!tagName && tagName === 'BODY') {
+              return parent;
+            }
+            return getBodyElement(parent);
+          }
+
+          var body = getBodyElement(elem);
+
+          _.each(body.find('div'), function(div, i){
+            if (!!div.className && div.className === 'map-wrapper') {
+              elem.css('max-height', parseInt(div.offsetHeight - 120, 10) + 'px');
+            }
+          });
+
           // Create the iScroll
           _iscrollObj = new iScroll(elem.attr('id'), scope.options() || {});
 
           scope.$watch('elements', function(value) {
+            // Set the height of the iscroll element - height is mandatorys
+            elem.css('height', elem.children('ul')[0].offsetHeight + 'px');
+            
             setTimeout(function() {
                 _iscrollObj.refresh();
               }, 1000);
