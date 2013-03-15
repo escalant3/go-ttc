@@ -10,8 +10,8 @@ angular.module('GoTTC')
 
         $scope.name = "GoTTC!";
         $scope.subtab = "";
-        $scope.latitude = "43.649724";
-        $scope.longitude = "-79.397142";
+        $scope.latitude = ""; //"43.649724";
+        $scope.longitude = ""; //"-79.397142";
 
         $rootScope.fullScreenLoading = true;
 
