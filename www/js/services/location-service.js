@@ -9,7 +9,7 @@ angular.module('GoTTC')
 
       function successCallback(position) {
         if (!!position.coords) {
-          $rootScope.$broadcast('gottc.position.changed', position.coords);
+          $rootScope.$broadcast('gottc.position.changed', position.coords, true);
         }
       }
 

@@ -17,7 +17,12 @@ angular.module('GoTTC')
 
         $scope.$on('gottc.store.nearby.changed', function(msg, data) {
           var nearby_stops = data;
-
+        
+          if (_.size(data)>0) {
+            $scope.latitude = data[0].lat;
+            $scope.longitude = data[0].lng;
+          }
+          
           $scope.nearby = nearby_stops;
           $scope.currentIntersection = ttcStore.getCurrentIntersection(data);
         });
@@ -67,10 +72,12 @@ angular.module('GoTTC')
           console.log(data);
         });
 
-        $scope.$on('gottc.position.changed', function(msg, data) {
-          $scope.longitude = data.longitude;
-          $scope.latitude = data.latitude;
-          ttcStore.getNearby($scope.latitude, $scope.longitude);
+        $scope.$on('gottc.position.changed', function(msg, data, gps_location) {
+          if (!gps_location) {
+            $scope.longitude = data.longitude;
+            $scope.latitude = data.latitude;
+          }
+          ttcStore.getNearby(data.latitude, data.longitude);
         });
 
         $scope.getFavouriteTime = function(station) {
